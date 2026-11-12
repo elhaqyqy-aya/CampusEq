@@ -1,0 +1,1550 @@
+{
+  "horodatage": "2026-11-04T22:10:10.992808+00:00",
+  "statut": "CHARGE",
+  "lot": 4,
+  "campagne": "f0288457-80f9-4a92-a5f9-6abd54a5b7a3",
+  "dossier": "/app/flux_demo/lot_000004",
+  "profil": "mixte",
+  "signature": "20ad55e96a207188a6398a89e72dd6acd0e9417afc10bc458f03902a383de282",
+  "empreintes": {
+    "locations.csv": "b841bea68e091143c361e861772c8ef19741b92c7b64d04117ddc28874e9c628",
+    "referentiels.json": "ca418e9ede101b63bf07eaefa1ce7ec7ffd6e995c3cb54a5bbd1044f0bb4baea"
+  },
+  "referentiel_signature": "fd35d90b852ff6efd29ca2c2cd72cba5418d3b6a8aa0817bc756ed1caa18cfad",
+  "rules_version": "campusequip-v2.0",
+  "schema_version": "campusequip-v2",
+  "batch_id": 4,
+  "duree_ms": 225.3,
+  "motif_rejet_structure": null,
+  "compteurs": {
+    "lignes_recues": 627,
+    "doublons_retires": 6,
+    "lignes_apres_dedoublonnage": 621,
+    "lignes_acceptees": 551,
+    "lignes_rejetees": 70,
+    "contrats_recus": 300,
+    "contrats_acceptes": 276,
+    "contrats_rejetes": 24,
+    "anomalies": 6,
+    "taux_rejet_pct": 11.27,
+    "alerte_qualite": false,
+    "lignes_ajoutees_en_base": 551
+  },
+  "rejets": [
+    {
+      "position": 5,
+      "contract_id": "902",
+      "line_no": "1",
+      "motifs": [
+        "QUANTITY_INVALIDE: « -1 » n'est pas un entier (chiffres uniquement)"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "902",
+        "client_id": "1061",
+        "site_id": "1",
+        "start_date": "2026-11-20",
+        "status": "draft",
+        "line_no": "1",
+        "equipment_id": "28",
+        "quantity": "-1",
+        "unit": "day",
+        "duration": "3",
+        "unit_rate": "245.00"
+      }
+    },
+    {
+      "position": 6,
+      "contract_id": "902",
+      "line_no": "2",
+      "motifs": [
+        "CONTRAT_EN_QUARANTAINE: ligne 5 invalide (QUANTITY_INVALIDE), tout le contrat est isolé"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "902",
+        "client_id": "1061",
+        "site_id": "1",
+        "start_date": "2026-11-20",
+        "status": "draft",
+        "line_no": "2",
+        "equipment_id": "26",
+        "quantity": "3",
+        "unit": "day",
+        "duration": "2",
+        "unit_rate": "300.00"
+      }
+    },
+    {
+      "position": 7,
+      "contract_id": "902",
+      "line_no": "3",
+      "motifs": [
+        "CONTRAT_EN_QUARANTAINE: ligne 5 invalide (QUANTITY_INVALIDE), tout le contrat est isolé"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "902",
+        "client_id": "1061",
+        "site_id": "1",
+        "start_date": "2026-11-20",
+        "status": "draft",
+        "line_no": "3",
+        "equipment_id": "37",
+        "quantity": "2",
+        "unit": "day",
+        "duration": "2",
+        "unit_rate": "243.00"
+      }
+    },
+    {
+      "position": 8,
+      "contract_id": "903",
+      "line_no": "1",
+      "motifs": [
+        "CLE_LIGNE_EN_CONFLIT: même (contract_id, line_no) avec un contenu différent"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "903",
+        "client_id": "1784",
+        "site_id": "11",
+        "start_date": "2026-11-21",
+        "status": "closed",
+        "line_no": "1",
+        "equipment_id": "116",
+        "quantity": "1",
+        "unit": "hour",
+        "duration": "7",
+        "unit_rate": "45.00"
+      }
+    },
+    {
+      "position": 9,
+      "contract_id": "903",
+      "line_no": "2",
+      "motifs": [
+        "CLE_LIGNE_EN_CONFLIT: même (contract_id, line_no) avec un contenu différent"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "903",
+        "client_id": "1784",
+        "site_id": "11",
+        "start_date": "2026-11-21",
+        "status": "closed",
+        "line_no": "2",
+        "equipment_id": "91",
+        "quantity": "3",
+        "unit": "hour",
+        "duration": "2",
+        "unit_rate": "35.00"
+      }
+    },
+    {
+      "position": 10,
+      "contract_id": "903",
+      "line_no": "3",
+      "motifs": [
+        "CLE_LIGNE_EN_CONFLIT: même (contract_id, line_no) avec un contenu différent"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "903",
+        "client_id": "1784",
+        "site_id": "11",
+        "start_date": "2026-11-21",
+        "status": "closed",
+        "line_no": "3",
+        "equipment_id": "91",
+        "quantity": "2",
+        "unit": "hour",
+        "duration": "6",
+        "unit_rate": "45.00"
+      }
+    },
+    {
+      "position": 11,
+      "contract_id": "903",
+      "line_no": "1",
+      "motifs": [
+        "CLE_LIGNE_EN_CONFLIT: même (contract_id, line_no) avec un contenu différent"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "903",
+        "client_id": "1784",
+        "site_id": "11",
+        "start_date": "2026-11-21",
+        "status": "closed",
+        "line_no": "1",
+        "equipment_id": "116",
+        "quantity": "1",
+        "unit": "hour",
+        "duration": "8",
+        "unit_rate": "45.00"
+      }
+    },
+    {
+      "position": 12,
+      "contract_id": "904",
+      "line_no": "1",
+      "motifs": [
+        "ENTETE_CONTRAT_CONTRADICTOIRE: client_id, site_id, start_date ou status diffèrent entre les lignes du contrat"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "904",
+        "client_id": "1001",
+        "site_id": "3",
+        "start_date": "2026-11-01",
+        "status": "paid",
+        "line_no": "1",
+        "equipment_id": "119",
+        "quantity": "3",
+        "unit": "hour",
+        "duration": "6",
+        "unit_rate": "44.00"
+      }
+    },
+    {
+      "position": 13,
+      "contract_id": "904",
+      "line_no": "2",
+      "motifs": [
+        "ENTETE_CONTRAT_CONTRADICTOIRE: client_id, site_id, start_date ou status diffèrent entre les lignes du contrat"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "904",
+        "client_id": "1001",
+        "site_id": "3",
+        "start_date": "2026-11-01",
+        "status": "paid",
+        "line_no": "2",
+        "equipment_id": "119",
+        "quantity": "1",
+        "unit": "day",
+        "duration": "3",
+        "unit_rate": "290.00"
+      }
+    },
+    {
+      "position": 14,
+      "contract_id": "904",
+      "line_no": "3",
+      "motifs": [
+        "ENTETE_CONTRAT_CONTRADICTOIRE: client_id, site_id, start_date ou status diffèrent entre les lignes du contrat"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "904",
+        "client_id": "1001",
+        "site_id": "3",
+        "start_date": "2026-11-01",
+        "status": "paid",
+        "line_no": "3",
+        "equipment_id": "14",
+        "quantity": "5",
+        "unit": "day",
+        "duration": "2",
+        "unit_rate": "268.00"
+      }
+    },
+    {
+      "position": 15,
+      "contract_id": "904",
+      "line_no": "4",
+      "motifs": [
+        "ENTETE_CONTRAT_CONTRADICTOIRE: client_id, site_id, start_date ou status diffèrent entre les lignes du contrat"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "904",
+        "client_id": "2000",
+        "site_id": "3",
+        "start_date": "2026-11-01",
+        "status": "paid",
+        "line_no": "4",
+        "equipment_id": "119",
+        "quantity": "3",
+        "unit": "hour",
+        "duration": "6",
+        "unit_rate": "44.00"
+      }
+    },
+    {
+      "position": 16,
+      "contract_id": "905",
+      "line_no": "1",
+      "motifs": [
+        "EQUIPEMENT_INCONNU: equipment_id 999999 absent du référentiel"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "905",
+        "client_id": "902",
+        "site_id": "12",
+        "start_date": "2026-11-02",
+        "status": "closed",
+        "line_no": "1",
+        "equipment_id": "999999",
+        "quantity": "2",
+        "unit": "hour",
+        "duration": "2",
+        "unit_rate": "15.00"
+      }
+    },
+    {
+      "position": 17,
+      "contract_id": "905",
+      "line_no": "2",
+      "motifs": [
+        "CONTRAT_EN_QUARANTAINE: ligne 16 invalide (EQUIPEMENT_INCONNU), tout le contrat est isolé"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "905",
+        "client_id": "902",
+        "site_id": "12",
+        "start_date": "2026-11-02",
+        "status": "closed",
+        "line_no": "2",
+        "equipment_id": "71",
+        "quantity": "4",
+        "unit": "day",
+        "duration": "5",
+        "unit_rate": "177.00"
+      }
+    },
+    {
+      "position": 104,
+      "contract_id": "952",
+      "line_no": "1",
+      "motifs": [
+        "QUANTITY_INVALIDE: « -1 » n'est pas un entier (chiffres uniquement)"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "952",
+        "client_id": "939",
+        "site_id": "11",
+        "start_date": "2026-11-07",
+        "status": "paid",
+        "line_no": "1",
+        "equipment_id": "65",
+        "quantity": "-1",
+        "unit": "hour",
+        "duration": "8",
+        "unit_rate": "66.00"
+      }
+    },
+    {
+      "position": 105,
+      "contract_id": "953",
+      "line_no": "1",
+      "motifs": [
+        "CLE_LIGNE_EN_CONFLIT: même (contract_id, line_no) avec un contenu différent"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "953",
+        "client_id": "1069",
+        "site_id": "11",
+        "start_date": "2026-11-08",
+        "status": "closed",
+        "line_no": "1",
+        "equipment_id": "45",
+        "quantity": "5",
+        "unit": "hour",
+        "duration": "8",
+        "unit_rate": "52.00"
+      }
+    },
+    {
+      "position": 106,
+      "contract_id": "953",
+      "line_no": "2",
+      "motifs": [
+        "CLE_LIGNE_EN_CONFLIT: même (contract_id, line_no) avec un contenu différent"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "953",
+        "client_id": "1069",
+        "site_id": "11",
+        "start_date": "2026-11-08",
+        "status": "closed",
+        "line_no": "2",
+        "equipment_id": "44",
+        "quantity": "3",
+        "unit": "hour",
+        "duration": "2",
+        "unit_rate": "56.00"
+      }
+    },
+    {
+      "position": 107,
+      "contract_id": "953",
+      "line_no": "1",
+      "motifs": [
+        "CLE_LIGNE_EN_CONFLIT: même (contract_id, line_no) avec un contenu différent"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "953",
+        "client_id": "1069",
+        "site_id": "11",
+        "start_date": "2026-11-08",
+        "status": "closed",
+        "line_no": "1",
+        "equipment_id": "45",
+        "quantity": "5",
+        "unit": "hour",
+        "duration": "9",
+        "unit_rate": "52.00"
+      }
+    },
+    {
+      "position": 108,
+      "contract_id": "954",
+      "line_no": "1",
+      "motifs": [
+        "ENTETE_CONTRAT_CONTRADICTOIRE: client_id, site_id, start_date ou status diffèrent entre les lignes du contrat"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "954",
+        "client_id": "1475",
+        "site_id": "12",
+        "start_date": "2026-11-09",
+        "status": "cancelled",
+        "line_no": "1",
+        "equipment_id": "17",
+        "quantity": "1",
+        "unit": "hour",
+        "duration": "7",
+        "unit_rate": "56.00"
+      }
+    },
+    {
+      "position": 109,
+      "contract_id": "954",
+      "line_no": "2",
+      "motifs": [
+        "ENTETE_CONTRAT_CONTRADICTOIRE: client_id, site_id, start_date ou status diffèrent entre les lignes du contrat"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "954",
+        "client_id": "1475",
+        "site_id": "12",
+        "start_date": "2026-11-09",
+        "status": "cancelled",
+        "line_no": "2",
+        "equipment_id": "115",
+        "quantity": "5",
+        "unit": "hour",
+        "duration": "6",
+        "unit_rate": "76.00"
+      }
+    },
+    {
+      "position": 110,
+      "contract_id": "954",
+      "line_no": "3",
+      "motifs": [
+        "ENTETE_CONTRAT_CONTRADICTOIRE: client_id, site_id, start_date ou status diffèrent entre les lignes du contrat"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "954",
+        "client_id": "2000",
+        "site_id": "12",
+        "start_date": "2026-11-09",
+        "status": "cancelled",
+        "line_no": "3",
+        "equipment_id": "17",
+        "quantity": "1",
+        "unit": "hour",
+        "duration": "7",
+        "unit_rate": "56.00"
+      }
+    },
+    {
+      "position": 111,
+      "contract_id": "955",
+      "line_no": "1",
+      "motifs": [
+        "EQUIPEMENT_INCONNU: equipment_id 999999 absent du référentiel"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "955",
+        "client_id": "1252",
+        "site_id": "5",
+        "start_date": "2026-11-10",
+        "status": "paid",
+        "line_no": "1",
+        "equipment_id": "999999",
+        "quantity": "3",
+        "unit": "hour",
+        "duration": "2",
+        "unit_rate": "68.00"
+      }
+    },
+    {
+      "position": 112,
+      "contract_id": "955",
+      "line_no": "2",
+      "motifs": [
+        "CONTRAT_EN_QUARANTAINE: ligne 111 invalide (EQUIPEMENT_INCONNU), tout le contrat est isolé"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "955",
+        "client_id": "1252",
+        "site_id": "5",
+        "start_date": "2026-11-10",
+        "status": "paid",
+        "line_no": "2",
+        "equipment_id": "68",
+        "quantity": "4",
+        "unit": "day",
+        "duration": "4",
+        "unit_rate": "87.00"
+      }
+    },
+    {
+      "position": 113,
+      "contract_id": "955",
+      "line_no": "3",
+      "motifs": [
+        "CONTRAT_EN_QUARANTAINE: ligne 111 invalide (EQUIPEMENT_INCONNU), tout le contrat est isolé"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "955",
+        "client_id": "1252",
+        "site_id": "5",
+        "start_date": "2026-11-10",
+        "status": "paid",
+        "line_no": "3",
+        "equipment_id": "101",
+        "quantity": "1",
+        "unit": "day",
+        "duration": "1",
+        "unit_rate": "185.00"
+      }
+    },
+    {
+      "position": 205,
+      "contract_id": "1002",
+      "line_no": "1",
+      "motifs": [
+        "QUANTITY_INVALIDE: « -1 » n'est pas un entier (chiffres uniquement)"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1002",
+        "client_id": "1628",
+        "site_id": "7",
+        "start_date": "2026-11-15",
+        "status": "cancelled",
+        "line_no": "1",
+        "equipment_id": "55",
+        "quantity": "-1",
+        "unit": "day",
+        "duration": "2",
+        "unit_rate": "288.00"
+      }
+    },
+    {
+      "position": 206,
+      "contract_id": "1002",
+      "line_no": "2",
+      "motifs": [
+        "CONTRAT_EN_QUARANTAINE: ligne 205 invalide (QUANTITY_INVALIDE), tout le contrat est isolé"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1002",
+        "client_id": "1628",
+        "site_id": "7",
+        "start_date": "2026-11-15",
+        "status": "cancelled",
+        "line_no": "2",
+        "equipment_id": "119",
+        "quantity": "5",
+        "unit": "hour",
+        "duration": "7",
+        "unit_rate": "62.00"
+      }
+    },
+    {
+      "position": 207,
+      "contract_id": "1003",
+      "line_no": "1",
+      "motifs": [
+        "CLE_LIGNE_EN_CONFLIT: même (contract_id, line_no) avec un contenu différent"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1003",
+        "client_id": "1464",
+        "site_id": "2",
+        "start_date": "2026-11-16",
+        "status": "draft",
+        "line_no": "1",
+        "equipment_id": "112",
+        "quantity": "2",
+        "unit": "hour",
+        "duration": "4",
+        "unit_rate": "48.00"
+      }
+    },
+    {
+      "position": 208,
+      "contract_id": "1003",
+      "line_no": "2",
+      "motifs": [
+        "CLE_LIGNE_EN_CONFLIT: même (contract_id, line_no) avec un contenu différent"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1003",
+        "client_id": "1464",
+        "site_id": "2",
+        "start_date": "2026-11-16",
+        "status": "draft",
+        "line_no": "2",
+        "equipment_id": "66",
+        "quantity": "1",
+        "unit": "hour",
+        "duration": "1",
+        "unit_rate": "38.00"
+      }
+    },
+    {
+      "position": 209,
+      "contract_id": "1003",
+      "line_no": "1",
+      "motifs": [
+        "CLE_LIGNE_EN_CONFLIT: même (contract_id, line_no) avec un contenu différent"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1003",
+        "client_id": "1464",
+        "site_id": "2",
+        "start_date": "2026-11-16",
+        "status": "draft",
+        "line_no": "1",
+        "equipment_id": "112",
+        "quantity": "2",
+        "unit": "hour",
+        "duration": "5",
+        "unit_rate": "48.00"
+      }
+    },
+    {
+      "position": 210,
+      "contract_id": "1004",
+      "line_no": "1",
+      "motifs": [
+        "ENTETE_CONTRAT_CONTRADICTOIRE: client_id, site_id, start_date ou status diffèrent entre les lignes du contrat"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1004",
+        "client_id": "50",
+        "site_id": "9",
+        "start_date": "2026-11-17",
+        "status": "paid",
+        "line_no": "1",
+        "equipment_id": "48",
+        "quantity": "3",
+        "unit": "hour",
+        "duration": "4",
+        "unit_rate": "17.00"
+      }
+    },
+    {
+      "position": 211,
+      "contract_id": "1004",
+      "line_no": "2",
+      "motifs": [
+        "ENTETE_CONTRAT_CONTRADICTOIRE: client_id, site_id, start_date ou status diffèrent entre les lignes du contrat"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1004",
+        "client_id": "50",
+        "site_id": "9",
+        "start_date": "2026-11-17",
+        "status": "paid",
+        "line_no": "2",
+        "equipment_id": "93",
+        "quantity": "3",
+        "unit": "hour",
+        "duration": "5",
+        "unit_rate": "58.00"
+      }
+    },
+    {
+      "position": 212,
+      "contract_id": "1004",
+      "line_no": "3",
+      "motifs": [
+        "ENTETE_CONTRAT_CONTRADICTOIRE: client_id, site_id, start_date ou status diffèrent entre les lignes du contrat"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1004",
+        "client_id": "50",
+        "site_id": "9",
+        "start_date": "2026-11-17",
+        "status": "paid",
+        "line_no": "3",
+        "equipment_id": "3",
+        "quantity": "4",
+        "unit": "hour",
+        "duration": "1",
+        "unit_rate": "68.00"
+      }
+    },
+    {
+      "position": 213,
+      "contract_id": "1004",
+      "line_no": "4",
+      "motifs": [
+        "ENTETE_CONTRAT_CONTRADICTOIRE: client_id, site_id, start_date ou status diffèrent entre les lignes du contrat"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1004",
+        "client_id": "2000",
+        "site_id": "9",
+        "start_date": "2026-11-17",
+        "status": "paid",
+        "line_no": "4",
+        "equipment_id": "48",
+        "quantity": "3",
+        "unit": "hour",
+        "duration": "4",
+        "unit_rate": "17.00"
+      }
+    },
+    {
+      "position": 214,
+      "contract_id": "1005",
+      "line_no": "1",
+      "motifs": [
+        "EQUIPEMENT_INCONNU: equipment_id 999999 absent du référentiel"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1005",
+        "client_id": "1085",
+        "site_id": "12",
+        "start_date": "2026-11-18",
+        "status": "cancelled",
+        "line_no": "1",
+        "equipment_id": "999999",
+        "quantity": "5",
+        "unit": "day",
+        "duration": "2",
+        "unit_rate": "94.00"
+      }
+    },
+    {
+      "position": 215,
+      "contract_id": "1005",
+      "line_no": "2",
+      "motifs": [
+        "CONTRAT_EN_QUARANTAINE: ligne 214 invalide (EQUIPEMENT_INCONNU), tout le contrat est isolé"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1005",
+        "client_id": "1085",
+        "site_id": "12",
+        "start_date": "2026-11-18",
+        "status": "cancelled",
+        "line_no": "2",
+        "equipment_id": "48",
+        "quantity": "2",
+        "unit": "hour",
+        "duration": "4",
+        "unit_rate": "15.00"
+      }
+    },
+    {
+      "position": 216,
+      "contract_id": "1005",
+      "line_no": "3",
+      "motifs": [
+        "CONTRAT_EN_QUARANTAINE: ligne 214 invalide (EQUIPEMENT_INCONNU), tout le contrat est isolé"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1005",
+        "client_id": "1085",
+        "site_id": "12",
+        "start_date": "2026-11-18",
+        "status": "cancelled",
+        "line_no": "3",
+        "equipment_id": "77",
+        "quantity": "5",
+        "unit": "hour",
+        "duration": "1",
+        "unit_rate": "11.00"
+      }
+    },
+    {
+      "position": 305,
+      "contract_id": "1052",
+      "line_no": "1",
+      "motifs": [
+        "QUANTITY_INVALIDE: « -1 » n'est pas un entier (chiffres uniquement)"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1052",
+        "client_id": "1454",
+        "site_id": "8",
+        "start_date": "2026-11-02",
+        "status": "paid",
+        "line_no": "1",
+        "equipment_id": "98",
+        "quantity": "-1",
+        "unit": "hour",
+        "duration": "3",
+        "unit_rate": "17.00"
+      }
+    },
+    {
+      "position": 306,
+      "contract_id": "1052",
+      "line_no": "2",
+      "motifs": [
+        "CONTRAT_EN_QUARANTAINE: ligne 305 invalide (QUANTITY_INVALIDE), tout le contrat est isolé"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1052",
+        "client_id": "1454",
+        "site_id": "8",
+        "start_date": "2026-11-02",
+        "status": "paid",
+        "line_no": "2",
+        "equipment_id": "32",
+        "quantity": "2",
+        "unit": "day",
+        "duration": "1",
+        "unit_rate": "100.00"
+      }
+    },
+    {
+      "position": 307,
+      "contract_id": "1052",
+      "line_no": "3",
+      "motifs": [
+        "CONTRAT_EN_QUARANTAINE: ligne 305 invalide (QUANTITY_INVALIDE), tout le contrat est isolé"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1052",
+        "client_id": "1454",
+        "site_id": "8",
+        "start_date": "2026-11-02",
+        "status": "paid",
+        "line_no": "3",
+        "equipment_id": "18",
+        "quantity": "1",
+        "unit": "hour",
+        "duration": "2",
+        "unit_rate": "61.00"
+      }
+    },
+    {
+      "position": 308,
+      "contract_id": "1053",
+      "line_no": "1",
+      "motifs": [
+        "CLE_LIGNE_EN_CONFLIT: même (contract_id, line_no) avec un contenu différent"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1053",
+        "client_id": "1162",
+        "site_id": "4",
+        "start_date": "2026-11-03",
+        "status": "closed",
+        "line_no": "1",
+        "equipment_id": "98",
+        "quantity": "3",
+        "unit": "day",
+        "duration": "5",
+        "unit_rate": "129.00"
+      }
+    },
+    {
+      "position": 309,
+      "contract_id": "1053",
+      "line_no": "2",
+      "motifs": [
+        "CLE_LIGNE_EN_CONFLIT: même (contract_id, line_no) avec un contenu différent"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1053",
+        "client_id": "1162",
+        "site_id": "4",
+        "start_date": "2026-11-03",
+        "status": "closed",
+        "line_no": "2",
+        "equipment_id": "29",
+        "quantity": "1",
+        "unit": "day",
+        "duration": "5",
+        "unit_rate": "273.00"
+      }
+    },
+    {
+      "position": 310,
+      "contract_id": "1053",
+      "line_no": "3",
+      "motifs": [
+        "CLE_LIGNE_EN_CONFLIT: même (contract_id, line_no) avec un contenu différent"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1053",
+        "client_id": "1162",
+        "site_id": "4",
+        "start_date": "2026-11-03",
+        "status": "closed",
+        "line_no": "3",
+        "equipment_id": "92",
+        "quantity": "3",
+        "unit": "hour",
+        "duration": "1",
+        "unit_rate": "43.00"
+      }
+    },
+    {
+      "position": 311,
+      "contract_id": "1053",
+      "line_no": "1",
+      "motifs": [
+        "CLE_LIGNE_EN_CONFLIT: même (contract_id, line_no) avec un contenu différent"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1053",
+        "client_id": "1162",
+        "site_id": "4",
+        "start_date": "2026-11-03",
+        "status": "closed",
+        "line_no": "1",
+        "equipment_id": "98",
+        "quantity": "3",
+        "unit": "day",
+        "duration": "6",
+        "unit_rate": "129.00"
+      }
+    },
+    {
+      "position": 312,
+      "contract_id": "1054",
+      "line_no": "1",
+      "motifs": [
+        "ENTETE_CONTRAT_CONTRADICTOIRE: client_id, site_id, start_date ou status diffèrent entre les lignes du contrat"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1054",
+        "client_id": "1642",
+        "site_id": "7",
+        "start_date": "2026-11-04",
+        "status": "closed",
+        "line_no": "1",
+        "equipment_id": "42",
+        "quantity": "5",
+        "unit": "day",
+        "duration": "4",
+        "unit_rate": "180.00"
+      }
+    },
+    {
+      "position": 313,
+      "contract_id": "1054",
+      "line_no": "2",
+      "motifs": [
+        "ENTETE_CONTRAT_CONTRADICTOIRE: client_id, site_id, start_date ou status diffèrent entre les lignes du contrat"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1054",
+        "client_id": "2000",
+        "site_id": "7",
+        "start_date": "2026-11-04",
+        "status": "closed",
+        "line_no": "2",
+        "equipment_id": "42",
+        "quantity": "5",
+        "unit": "day",
+        "duration": "4",
+        "unit_rate": "180.00"
+      }
+    },
+    {
+      "position": 314,
+      "contract_id": "1055",
+      "line_no": "1",
+      "motifs": [
+        "EQUIPEMENT_INCONNU: equipment_id 999999 absent du référentiel"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1055",
+        "client_id": "379",
+        "site_id": "11",
+        "start_date": "2026-11-05",
+        "status": "paid",
+        "line_no": "1",
+        "equipment_id": "999999",
+        "quantity": "2",
+        "unit": "day",
+        "duration": "2",
+        "unit_rate": "266.00"
+      }
+    },
+    {
+      "position": 315,
+      "contract_id": "1055",
+      "line_no": "2",
+      "motifs": [
+        "CONTRAT_EN_QUARANTAINE: ligne 314 invalide (EQUIPEMENT_INCONNU), tout le contrat est isolé"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1055",
+        "client_id": "379",
+        "site_id": "11",
+        "start_date": "2026-11-05",
+        "status": "paid",
+        "line_no": "2",
+        "equipment_id": "113",
+        "quantity": "5",
+        "unit": "hour",
+        "duration": "7",
+        "unit_rate": "44.00"
+      }
+    },
+    {
+      "position": 316,
+      "contract_id": "1055",
+      "line_no": "3",
+      "motifs": [
+        "CONTRAT_EN_QUARANTAINE: ligne 314 invalide (EQUIPEMENT_INCONNU), tout le contrat est isolé"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1055",
+        "client_id": "379",
+        "site_id": "11",
+        "start_date": "2026-11-05",
+        "status": "paid",
+        "line_no": "3",
+        "equipment_id": "83",
+        "quantity": "2",
+        "unit": "day",
+        "duration": "3",
+        "unit_rate": "163.00"
+      }
+    },
+    {
+      "position": 417,
+      "contract_id": "1102",
+      "line_no": "1",
+      "motifs": [
+        "QUANTITY_INVALIDE: « -1 » n'est pas un entier (chiffres uniquement)"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1102",
+        "client_id": "1134",
+        "site_id": "8",
+        "start_date": "2026-11-10",
+        "status": "paid",
+        "line_no": "1",
+        "equipment_id": "42",
+        "quantity": "-1",
+        "unit": "day",
+        "duration": "1",
+        "unit_rate": "147.00"
+      }
+    },
+    {
+      "position": 418,
+      "contract_id": "1102",
+      "line_no": "2",
+      "motifs": [
+        "CONTRAT_EN_QUARANTAINE: ligne 417 invalide (QUANTITY_INVALIDE), tout le contrat est isolé"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1102",
+        "client_id": "1134",
+        "site_id": "8",
+        "start_date": "2026-11-10",
+        "status": "paid",
+        "line_no": "2",
+        "equipment_id": "6",
+        "quantity": "2",
+        "unit": "day",
+        "duration": "3",
+        "unit_rate": "125.00"
+      }
+    },
+    {
+      "position": 419,
+      "contract_id": "1103",
+      "line_no": "1",
+      "motifs": [
+        "CLE_LIGNE_EN_CONFLIT: même (contract_id, line_no) avec un contenu différent"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1103",
+        "client_id": "1915",
+        "site_id": "3",
+        "start_date": "2026-11-11",
+        "status": "closed",
+        "line_no": "1",
+        "equipment_id": "48",
+        "quantity": "2",
+        "unit": "hour",
+        "duration": "5",
+        "unit_rate": "54.00"
+      }
+    },
+    {
+      "position": 420,
+      "contract_id": "1103",
+      "line_no": "2",
+      "motifs": [
+        "CLE_LIGNE_EN_CONFLIT: même (contract_id, line_no) avec un contenu différent"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1103",
+        "client_id": "1915",
+        "site_id": "3",
+        "start_date": "2026-11-11",
+        "status": "closed",
+        "line_no": "2",
+        "equipment_id": "55",
+        "quantity": "2",
+        "unit": "day",
+        "duration": "4",
+        "unit_rate": "289.00"
+      }
+    },
+    {
+      "position": 421,
+      "contract_id": "1103",
+      "line_no": "3",
+      "motifs": [
+        "CLE_LIGNE_EN_CONFLIT: même (contract_id, line_no) avec un contenu différent"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1103",
+        "client_id": "1915",
+        "site_id": "3",
+        "start_date": "2026-11-11",
+        "status": "closed",
+        "line_no": "3",
+        "equipment_id": "97",
+        "quantity": "5",
+        "unit": "hour",
+        "duration": "4",
+        "unit_rate": "10.00"
+      }
+    },
+    {
+      "position": 422,
+      "contract_id": "1103",
+      "line_no": "1",
+      "motifs": [
+        "CLE_LIGNE_EN_CONFLIT: même (contract_id, line_no) avec un contenu différent"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1103",
+        "client_id": "1915",
+        "site_id": "3",
+        "start_date": "2026-11-11",
+        "status": "closed",
+        "line_no": "1",
+        "equipment_id": "48",
+        "quantity": "2",
+        "unit": "hour",
+        "duration": "6",
+        "unit_rate": "54.00"
+      }
+    },
+    {
+      "position": 423,
+      "contract_id": "1104",
+      "line_no": "1",
+      "motifs": [
+        "ENTETE_CONTRAT_CONTRADICTOIRE: client_id, site_id, start_date ou status diffèrent entre les lignes du contrat"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1104",
+        "client_id": "589",
+        "site_id": "7",
+        "start_date": "2026-11-12",
+        "status": "cancelled",
+        "line_no": "1",
+        "equipment_id": "44",
+        "quantity": "5",
+        "unit": "hour",
+        "duration": "7",
+        "unit_rate": "17.00"
+      }
+    },
+    {
+      "position": 424,
+      "contract_id": "1104",
+      "line_no": "2",
+      "motifs": [
+        "ENTETE_CONTRAT_CONTRADICTOIRE: client_id, site_id, start_date ou status diffèrent entre les lignes du contrat"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1104",
+        "client_id": "589",
+        "site_id": "7",
+        "start_date": "2026-11-12",
+        "status": "cancelled",
+        "line_no": "2",
+        "equipment_id": "53",
+        "quantity": "4",
+        "unit": "day",
+        "duration": "5",
+        "unit_rate": "238.00"
+      }
+    },
+    {
+      "position": 425,
+      "contract_id": "1104",
+      "line_no": "3",
+      "motifs": [
+        "ENTETE_CONTRAT_CONTRADICTOIRE: client_id, site_id, start_date ou status diffèrent entre les lignes du contrat"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1104",
+        "client_id": "589",
+        "site_id": "7",
+        "start_date": "2026-11-12",
+        "status": "cancelled",
+        "line_no": "3",
+        "equipment_id": "45",
+        "quantity": "1",
+        "unit": "hour",
+        "duration": "4",
+        "unit_rate": "27.00"
+      }
+    },
+    {
+      "position": 426,
+      "contract_id": "1104",
+      "line_no": "4",
+      "motifs": [
+        "ENTETE_CONTRAT_CONTRADICTOIRE: client_id, site_id, start_date ou status diffèrent entre les lignes du contrat"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1104",
+        "client_id": "2000",
+        "site_id": "7",
+        "start_date": "2026-11-12",
+        "status": "cancelled",
+        "line_no": "4",
+        "equipment_id": "44",
+        "quantity": "5",
+        "unit": "hour",
+        "duration": "7",
+        "unit_rate": "17.00"
+      }
+    },
+    {
+      "position": 427,
+      "contract_id": "1105",
+      "line_no": "1",
+      "motifs": [
+        "EQUIPEMENT_INCONNU: equipment_id 999999 absent du référentiel"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1105",
+        "client_id": "1709",
+        "site_id": "3",
+        "start_date": "2026-11-13",
+        "status": "paid",
+        "line_no": "1",
+        "equipment_id": "999999",
+        "quantity": "5",
+        "unit": "day",
+        "duration": "1",
+        "unit_rate": "265.00"
+      }
+    },
+    {
+      "position": 428,
+      "contract_id": "1105",
+      "line_no": "2",
+      "motifs": [
+        "CONTRAT_EN_QUARANTAINE: ligne 427 invalide (EQUIPEMENT_INCONNU), tout le contrat est isolé"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1105",
+        "client_id": "1709",
+        "site_id": "3",
+        "start_date": "2026-11-13",
+        "status": "paid",
+        "line_no": "2",
+        "equipment_id": "18",
+        "quantity": "4",
+        "unit": "hour",
+        "duration": "6",
+        "unit_rate": "16.00"
+      }
+    },
+    {
+      "position": 429,
+      "contract_id": "1105",
+      "line_no": "3",
+      "motifs": [
+        "CONTRAT_EN_QUARANTAINE: ligne 427 invalide (EQUIPEMENT_INCONNU), tout le contrat est isolé"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1105",
+        "client_id": "1709",
+        "site_id": "3",
+        "start_date": "2026-11-13",
+        "status": "paid",
+        "line_no": "3",
+        "equipment_id": "27",
+        "quantity": "5",
+        "unit": "hour",
+        "duration": "1",
+        "unit_rate": "41.00"
+      }
+    },
+    {
+      "position": 520,
+      "contract_id": "1152",
+      "line_no": "1",
+      "motifs": [
+        "QUANTITY_INVALIDE: « -1 » n'est pas un entier (chiffres uniquement)"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1152",
+        "client_id": "399",
+        "site_id": "10",
+        "start_date": "2026-11-18",
+        "status": "closed",
+        "line_no": "1",
+        "equipment_id": "82",
+        "quantity": "-1",
+        "unit": "day",
+        "duration": "5",
+        "unit_rate": "124.00"
+      }
+    },
+    {
+      "position": 521,
+      "contract_id": "1152",
+      "line_no": "2",
+      "motifs": [
+        "CONTRAT_EN_QUARANTAINE: ligne 520 invalide (QUANTITY_INVALIDE), tout le contrat est isolé"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1152",
+        "client_id": "399",
+        "site_id": "10",
+        "start_date": "2026-11-18",
+        "status": "closed",
+        "line_no": "2",
+        "equipment_id": "108",
+        "quantity": "5",
+        "unit": "day",
+        "duration": "2",
+        "unit_rate": "204.00"
+      }
+    },
+    {
+      "position": 522,
+      "contract_id": "1153",
+      "line_no": "1",
+      "motifs": [
+        "CLE_LIGNE_EN_CONFLIT: même (contract_id, line_no) avec un contenu différent"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1153",
+        "client_id": "219",
+        "site_id": "9",
+        "start_date": "2026-11-19",
+        "status": "cancelled",
+        "line_no": "1",
+        "equipment_id": "18",
+        "quantity": "1",
+        "unit": "day",
+        "duration": "1",
+        "unit_rate": "146.00"
+      }
+    },
+    {
+      "position": 523,
+      "contract_id": "1153",
+      "line_no": "2",
+      "motifs": [
+        "CLE_LIGNE_EN_CONFLIT: même (contract_id, line_no) avec un contenu différent"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1153",
+        "client_id": "219",
+        "site_id": "9",
+        "start_date": "2026-11-19",
+        "status": "cancelled",
+        "line_no": "2",
+        "equipment_id": "68",
+        "quantity": "3",
+        "unit": "day",
+        "duration": "2",
+        "unit_rate": "270.00"
+      }
+    },
+    {
+      "position": 524,
+      "contract_id": "1153",
+      "line_no": "3",
+      "motifs": [
+        "CLE_LIGNE_EN_CONFLIT: même (contract_id, line_no) avec un contenu différent"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1153",
+        "client_id": "219",
+        "site_id": "9",
+        "start_date": "2026-11-19",
+        "status": "cancelled",
+        "line_no": "3",
+        "equipment_id": "21",
+        "quantity": "3",
+        "unit": "hour",
+        "duration": "2",
+        "unit_rate": "37.00"
+      }
+    },
+    {
+      "position": 525,
+      "contract_id": "1153",
+      "line_no": "1",
+      "motifs": [
+        "CLE_LIGNE_EN_CONFLIT: même (contract_id, line_no) avec un contenu différent"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1153",
+        "client_id": "219",
+        "site_id": "9",
+        "start_date": "2026-11-19",
+        "status": "cancelled",
+        "line_no": "1",
+        "equipment_id": "18",
+        "quantity": "1",
+        "unit": "day",
+        "duration": "2",
+        "unit_rate": "146.00"
+      }
+    },
+    {
+      "position": 526,
+      "contract_id": "1154",
+      "line_no": "1",
+      "motifs": [
+        "ENTETE_CONTRAT_CONTRADICTOIRE: client_id, site_id, start_date ou status diffèrent entre les lignes du contrat"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1154",
+        "client_id": "350",
+        "site_id": "5",
+        "start_date": "2026-11-20",
+        "status": "paid",
+        "line_no": "1",
+        "equipment_id": "50",
+        "quantity": "5",
+        "unit": "day",
+        "duration": "2",
+        "unit_rate": "184.00"
+      }
+    },
+    {
+      "position": 527,
+      "contract_id": "1154",
+      "line_no": "2",
+      "motifs": [
+        "ENTETE_CONTRAT_CONTRADICTOIRE: client_id, site_id, start_date ou status diffèrent entre les lignes du contrat"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1154",
+        "client_id": "2000",
+        "site_id": "5",
+        "start_date": "2026-11-20",
+        "status": "paid",
+        "line_no": "2",
+        "equipment_id": "50",
+        "quantity": "5",
+        "unit": "day",
+        "duration": "2",
+        "unit_rate": "184.00"
+      }
+    },
+    {
+      "position": 528,
+      "contract_id": "1155",
+      "line_no": "1",
+      "motifs": [
+        "EQUIPEMENT_INCONNU: equipment_id 999999 absent du référentiel"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1155",
+        "client_id": "458",
+        "site_id": "8",
+        "start_date": "2026-11-21",
+        "status": "paid",
+        "line_no": "1",
+        "equipment_id": "999999",
+        "quantity": "3",
+        "unit": "hour",
+        "duration": "2",
+        "unit_rate": "38.00"
+      }
+    },
+    {
+      "position": 529,
+      "contract_id": "1155",
+      "line_no": "2",
+      "motifs": [
+        "CONTRAT_EN_QUARANTAINE: ligne 528 invalide (EQUIPEMENT_INCONNU), tout le contrat est isolé"
+      ],
+      "valeurs_brutes": {
+        "contract_id": "1155",
+        "client_id": "458",
+        "site_id": "8",
+        "start_date": "2026-11-21",
+        "status": "paid",
+        "line_no": "2",
+        "equipment_id": "58",
+        "quantity": "1",
+        "unit": "day",
+        "duration": "1",
+        "unit_rate": "139.00"
+      }
+    }
+  ],
+  "anomalies": [
+    {
+      "position": 18,
+      "contract_id": "906",
+      "line_no": "1",
+      "code": "QUANTITE_ELEVEE",
+      "detail": "QUANTITE_ELEVEE: quantité 25 supérieure à 20"
+    },
+    {
+      "position": 114,
+      "contract_id": "956",
+      "line_no": "1",
+      "code": "QUANTITE_ELEVEE",
+      "detail": "QUANTITE_ELEVEE: quantité 25 supérieure à 20"
+    },
+    {
+      "position": 217,
+      "contract_id": "1006",
+      "line_no": "1",
+      "code": "QUANTITE_ELEVEE",
+      "detail": "QUANTITE_ELEVEE: quantité 25 supérieure à 20"
+    },
+    {
+      "position": 317,
+      "contract_id": "1056",
+      "line_no": "1",
+      "code": "QUANTITE_ELEVEE",
+      "detail": "QUANTITE_ELEVEE: quantité 25 supérieure à 20"
+    },
+    {
+      "position": 430,
+      "contract_id": "1106",
+      "line_no": "1",
+      "code": "QUANTITE_ELEVEE",
+      "detail": "QUANTITE_ELEVEE: quantité 25 supérieure à 20"
+    },
+    {
+      "position": 530,
+      "contract_id": "1156",
+      "line_no": "1",
+      "code": "QUANTITE_ELEVEE",
+      "detail": "QUANTITE_ELEVEE: quantité 25 supérieure à 20"
+    }
+  ],
+  "quarantaine": "/app/quarantaine/lot_000004_20261104T221011_172097.jsonl"
+}
