@@ -1,0 +1,69 @@
+{
+  "collection": "events",
+  "source": "CampusEquip_etudiant/axes_3_4/flux/lot-000001/evenements.jsonl",
+  "documents": [
+    {
+      "device_id": "sim-01",
+      "event_id": "1ac724d7-eb7c-44f6-bf06-529b48a1a990-000001-2",
+      "contract_id": 7,
+      "event_type": "incident",
+      "observed_at": "2026-11-01T00:12:00Z",
+      "observed_at_date": "2026-11-01T00:12:00Z",
+      "payload": {},
+      "normalized": {
+        "device_id": "sim-01",
+        "event_id": "1ac724d7-eb7c-44f6-bf06-529b48a1a990-000001-2",
+        "contract_id": 7,
+        "event_type": "incident",
+        "observed_at": "2026-11-01T00:12:00Z",
+        "payload": {}
+      },
+      "campaign_id": "1ac724d7-eb7c-44f6-bf06-529b48a1a990",
+      "batch_no": 1,
+      "source_line": 3,
+      "source_sha256": "251a94119f1882d1f9e5549175cf714331991780f3028fe819b40c1d8b0a183d"
+    },
+    {
+      "device_id": "sim-01",
+      "event_id": "1ac724d7-eb7c-44f6-bf06-529b48a1a990-000001-4",
+      "contract_id": 9,
+      "event_type": "position",
+      "observed_at": "2026-11-01T00:14:00Z",
+      "observed_at_date": "2026-11-01T00:14:00Z",
+      "payload": {
+        "latitude": 0.01,
+        "longitude": 0.02
+      },
+      "normalized": {
+        "device_id": "sim-01",
+        "event_id": "1ac724d7-eb7c-44f6-bf06-529b48a1a990-000001-4",
+        "contract_id": 9,
+        "event_type": "position",
+        "observed_at": "2026-11-01T00:14:00Z",
+        "payload": {
+          "latitude": 0.01,
+          "longitude": 0.02
+        }
+      },
+      "campaign_id": "1ac724d7-eb7c-44f6-bf06-529b48a1a990",
+      "batch_no": 1,
+      "source_line": 5,
+      "source_sha256": "251a94119f1882d1f9e5549175cf714331991780f3028fe819b40c1d8b0a183d"
+    }
+  ],
+  "indexes": [
+    {
+      "name": "ux_event_identity",
+      "keys": ["device_id", "event_id"],
+      "unique": true
+    },
+    {
+      "name": "ix_contract_history",
+      "keys": ["contract_id", "observed_at_date", "device_id", "event_id"]
+    },
+    {
+      "name": "ix_contract_latest",
+      "keys": ["contract_id", "observed_at_date DESC", "device_id DESC", "event_id DESC"]
+    }
+  ]
+}
