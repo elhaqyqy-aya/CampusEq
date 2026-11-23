@@ -1,0 +1,28 @@
+# Contexte de construction : on n'embarque que le nécessaire.
+.venv/
+venv/
+.git/
+.gitignore
+.dsh-office-*/
+.tests_tmp/
+.demo/
+pip-ephem-wheel-cache-*/
+pip-install-*/
+_apercu/
+__pycache__/
+**/__pycache__/
+*.pyc
+.pytest_cache/
+
+# Sorties régénérées dans le conteneur (montées en volumes)
+rapports/
+quarantaine/
+resultats/
+
+# Documents lourds inutiles à l'exécution
+Projet_final_Sujet_etudiant.pdf
+Projet_final_Sujet_etudiant.docx
+GUIDE_PROJET.docx
+GUIDE_PROJET.pdf
+RAPPORT.docx
+RAPPORT.pdf

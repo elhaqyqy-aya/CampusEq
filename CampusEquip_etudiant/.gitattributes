@@ -1,0 +1,5 @@
+# Les scripts shell doivent rester en LF, même sur un poste Windows :
+# un entrypoint en CRLF casse le conteneur (« /bin/sh^M: bad interpreter »).
+*.sh text eol=lf
+Dockerfile text eol=lf
+docker-compose.yml text eol=lf

@@ -1,0 +1,45 @@
+-- Avec index (montant)
+GroupAggregate (actual time=119.082..119.085 rows=1 loops=1)
+  Group Key: s.campus_id, c2.name
+  Buffers: shared hit=5072
+  ->  Sort (actual time=118.303..118.448 rows=2778 loops=1)
+        Sort Key: s.campus_id, c2.name
+        Sort Method: quicksort  Memory: 205kB
+        Buffers: shared hit=5072
+        ->  Hash Join (actual time=1.959..117.147 rows=2778 loops=1)
+              Hash Cond: (s.campus_id = c2.campus_id)
+              Buffers: shared hit=5072
+              ->  Nested Loop (actual time=1.921..116.198 rows=2778 loops=1)
+                    Buffers: shared hit=5071
+                    ->  Hash Join (actual time=1.902..114.147 rows=2778 loops=1)
+                          Hash Cond: (l.contract_id = c.contract_id)
+                          Buffers: shared hit=5069
+                          ->  Seq Scan on contract_lines l (actual time=0.013..49.242 rows=500000 loops=1)
+                                Buffers: shared hit=3677
+                          ->  Hash (actual time=1.836..1.837 rows=1389 loops=1)
+                                Buckets: 2048  Batches: 1  Memory Usage: 71kB
+                                Buffers: shared hit=1392
+                                ->  Bitmap Heap Scan on contracts c (actual time=0.429..1.591 rows=1389 loops=1)
+                                      Recheck Cond: ((start_date = '2026-11-06'::date) AND (status = ANY ('{paid,closed}'::text[])))
+                                      Heap Blocks: exact=1389
+                                      Buffers: shared hit=1392
+                                      ->  Bitmap Index Scan on ix_contracts_ret (actual time=0.232..0.232 rows=1389 loops=1)
+                                            Index Cond: (start_date = '2026-11-06'::date)
+                                            Buffers: shared hit=3
+                    ->  Memoize (actual time=0.000..0.000 rows=1 loops=2778)
+                          Cache Key: c.site_id
+                          Cache Mode: logical
+                          Hits: 2777  Misses: 1  Evictions: 0  Overflows: 0  Memory Usage: 1kB
+                          Buffers: shared hit=2
+                          ->  Index Scan using sites_pkey on sites s (actual time=0.012..0.012 rows=1 loops=1)
+                                Index Cond: (site_id = c.site_id)
+                                Buffers: shared hit=2
+              ->  Hash (actual time=0.024..0.025 rows=6 loops=1)
+                    Buckets: 2048  Batches: 1  Memory Usage: 17kB
+                    Buffers: shared hit=1
+                    ->  Seq Scan on campus c2 (actual time=0.017..0.018 rows=6 loops=1)
+                          Buffers: shared hit=1
+Planning:
+  Buffers: shared hit=16
+Planning Time: 0.565 ms
+Execution Time: 119.242 ms

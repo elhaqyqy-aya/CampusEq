@@ -1,0 +1,10 @@
+# Dépendances du projet CampusEquip (axes 1 et 2)
+# Installer avec : pip install -r requirements.txt
+
+psycopg2-binary>=2.9        # connexion PostgreSQL
+Pillow>=10.0                # graphiques PNG (bonus et rapport)
+Flask>=3.0                  # console web (dashboard)
+-r axes_3_4/requirements.txt # clients des données opérationnelles en lecture seule
+
+# Uniquement pour régénérer RAPPORT.docx (python -m outils.rapport)
+python-docx>=1.1

@@ -1,0 +1,40 @@
+-- Sans index (montant)
+GroupAggregate (actual time=210.893..210.899 rows=1 loops=1)
+  Group Key: s.campus_id, c2.name
+  Buffers: shared hit=5272
+  ->  Sort (actual time=209.521..209.739 rows=2778 loops=1)
+        Sort Key: s.campus_id, c2.name
+        Sort Method: quicksort  Memory: 205kB
+        Buffers: shared hit=5272
+        ->  Hash Join (actual time=62.387..207.960 rows=2778 loops=1)
+              Hash Cond: (s.campus_id = c2.campus_id)
+              Buffers: shared hit=5272
+              ->  Hash Join (actual time=62.351..206.744 rows=2778 loops=1)
+                    Hash Cond: (c.site_id = s.site_id)
+                    Buffers: shared hit=5271
+                    ->  Hash Join (actual time=62.327..205.553 rows=2778 loops=1)
+                          Hash Cond: (l.contract_id = c.contract_id)
+                          Buffers: shared hit=5270
+                          ->  Seq Scan on contract_lines l (actual time=0.012..60.436 rows=500000 loops=1)
+                                Buffers: shared hit=3677
+                          ->  Hash (actual time=62.255..62.255 rows=1389 loops=1)
+                                Buckets: 2048  Batches: 1  Memory Usage: 71kB
+                                Buffers: shared hit=1593
+                                ->  Seq Scan on contracts c (actual time=0.040..61.668 rows=1389 loops=1)
+                                      Filter: ((status = ANY ('{paid,closed}'::text[])) AND (start_date = '2026-11-06'::date))
+                                      Rows Removed by Filter: 248611
+                                      Buffers: shared hit=1593
+                    ->  Hash (actual time=0.013..0.013 rows=12 loops=1)
+                          Buckets: 2048  Batches: 1  Memory Usage: 17kB
+                          Buffers: shared hit=1
+                          ->  Seq Scan on sites s (actual time=0.007..0.009 rows=12 loops=1)
+                                Buffers: shared hit=1
+              ->  Hash (actual time=0.021..0.022 rows=6 loops=1)
+                    Buckets: 2048  Batches: 1  Memory Usage: 17kB
+                    Buffers: shared hit=1
+                    ->  Seq Scan on campus c2 (actual time=0.015..0.016 rows=6 loops=1)
+                          Buffers: shared hit=1
+Planning:
+  Buffers: shared hit=16
+Planning Time: 0.450 ms
+Execution Time: 211.036 ms

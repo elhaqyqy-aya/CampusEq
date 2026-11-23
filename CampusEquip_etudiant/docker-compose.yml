@@ -1,0 +1,166 @@
+# =====================================================================
+#  CampusEquip — pile complète : axes 1–4 et services de données
+#
+#     docker compose up -d --build      # application complète, axes 1–4
+#     docker compose logs -f app        # suivre le démarrage
+#     docker compose exec db psql -U campusequip -d campusequip
+#
+#  La console répond sur http://localhost:5055
+#  PostgreSQL est exposé sur localhost:5433 (pour ne pas gêner un 5432 local).
+# =====================================================================
+name: campusequip
+
+services:
+  db:
+    image: postgres:17-alpine
+    container_name: campusequip-db
+    environment:
+      POSTGRES_USER: campusequip
+      POSTGRES_PASSWORD: campusequip
+      POSTGRES_DB: campusequip
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=C"
+      TZ: Africa/Casablanca
+    ports:
+      - "127.0.0.1:${POSTGRES_HOST_PORT:-5433}:5432"
+    volumes:
+      - donnees_pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U campusequip -d campusequip"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 5s
+    restart: unless-stopped
+
+  app:
+    build:
+      context: .
+      dockerfile: docker/app.Dockerfile
+    image: campusequip/app:2.0
+    container_name: campusequip-app
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://campusequip:campusequip@db:5432/campusequip
+      CAMPUSEQUIP_TEST_URL: postgresql://campusequip:campusequip@db:5432/campusequip_test
+      MONGODB_URL: mongodb://mongodb:27017
+      MONGODB_DATABASE: campusequip
+      REDIS_URL: redis://redis:6379/0
+      TIMESCALE_URL: postgresql://campusequip:campusequip@timescaledb:5432/campusequip_ts
+      CAMPUSEQUIP_RAPPORTS: /app/rapports
+      CAMPUSEQUIP_QUARANTAINE: /app/quarantaine
+      CAMPUSEQUIP_UI_EVENTS_DIR: /app/axes_3_4/flux_ui
+      AUTO_DEMO: "1"          # charge 4 lots de démonstration si la base est vide
+      PORT: "5055"
+      TZ: Africa/Casablanca
+    ports:
+      - "127.0.0.1:${APP_HOST_PORT:-5055}:5055"
+    volumes:
+      - ./rapports:/app/rapports
+      - ./quarantaine:/app/quarantaine
+      - ./resultats:/app/resultats
+      - ./axes_3_4/flux_ui:/app/axes_3_4/flux_ui
+      - flux_demo:/app/flux_demo
+    restart: unless-stopped
+
+  mongodb:
+    image: mongo:7.0
+    container_name: campusequip-mongodb
+    ports:
+      - "127.0.0.1:${MONGODB_HOST_PORT:-27018}:27017"
+    volumes:
+      - donnees_mongo:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    restart: unless-stopped
+
+  redis:
+    image: redis:7.4-alpine
+    container_name: campusequip-redis
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - "127.0.0.1:${REDIS_HOST_PORT:-6380}:6379"
+    volumes:
+      - donnees_redis:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+    restart: unless-stopped
+
+  timescaledb:
+    image: timescale/timescaledb:2.17.2-pg17
+    container_name: campusequip-timescaledb
+    environment:
+      POSTGRES_USER: campusequip
+      POSTGRES_PASSWORD: campusequip
+      POSTGRES_DB: campusequip_ts
+      TZ: Africa/Casablanca
+    ports:
+      - "127.0.0.1:${TIMESCALE_HOST_PORT:-5435}:5432"
+    volumes:
+      - donnees_timescale:/var/lib/postgresql/data
+      - ./axes_3_4/storage/timescale.sql:/docker-entrypoint-initdb.d/10-axes34.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U campusequip -d campusequip_ts"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    restart: unless-stopped
+
+  airflow:
+    build:
+      context: .
+      dockerfile: docker/airflow-axes34.Dockerfile
+    image: campusequip/airflow-axes34:2.10.5
+    container_name: campusequip-airflow
+    depends_on:
+      db:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      timescaledb:
+        condition: service_healthy
+    environment:
+      AIRFLOW__CORE__EXECUTOR: SequentialExecutor
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__CORE__DAGS_FOLDER: /opt/airflow/campusequip/axes_3_4/orchestration/dags
+      AIRFLOW__WEBSERVER__EXPOSE_CONFIG: "false"
+      AIRFLOW_HOME: /opt/airflow/state
+      DATABASE_URL: postgresql://campusequip:campusequip@db:5432/campusequip
+      MONGODB_URL: mongodb://mongodb:27017
+      MONGODB_DATABASE: campusequip
+      REDIS_URL: redis://redis:6379/0
+      TIMESCALE_URL: postgresql://campusequip:campusequip@timescaledb:5432/campusequip_ts
+      AXES34_EVENTS_DIR: /opt/airflow/events
+      CAMPUSEQUIP_LOCATION_BATCH: ${CAMPUSEQUIP_LOCATION_BATCH:-}
+      TZ: Africa/Casablanca
+    ports:
+      - "127.0.0.1:${AIRFLOW_HOST_PORT:-8080}:8080"
+    volumes:
+      - ./axes_3_4/flux:/opt/airflow/events
+      - ./axes_3_4/locations:/opt/airflow/location_batches:ro
+      - airflow_home:/opt/airflow/state
+    command: airflow standalone
+    restart: unless-stopped
+
+volumes:
+  donnees_pg:
+    name: campusequip_pgdata
+  flux_demo:
+    name: campusequip_flux
+  donnees_mongo:
+    name: campusequip_mongodbdata
+  donnees_redis:
+    name: campusequip_redisdata
+  donnees_timescale:
+    name: campusequip_timescaledata
+  airflow_home:
+    name: campusequip_airflowdata

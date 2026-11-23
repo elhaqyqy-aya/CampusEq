@@ -1,0 +1,10 @@
+{"contract_id": 1, "device_id": "sim-01", "event_id": "1ac724d7-eb7c-44f6-bf06-529b48a1a990-000003-0", "event_type": "withdrawal", "observed_at": "2026-11-01T00:30:00Z", "payload": {}}
+{"contract_id": 6, "device_id": "sim-01", "event_id": "1ac724d7-eb7c-44f6-bf06-529b48a1a990-000003-1", "event_type": "return", "observed_at": "2026-11-01T00:31:00Z", "payload": {}}
+{"contract_id": 7, "device_id": "sim-01", "event_id": "1ac724d7-eb7c-44f6-bf06-529b48a1a990-000003-2", "event_type": "incident", "observed_at": "2026-11-01T00:32:00Z", "payload": {}}
+{"contract_id": 8, "device_id": "sim-01", "event_id": "1ac724d7-eb7c-44f6-bf06-529b48a1a990-000003-3", "event_type": "failure", "observed_at": "2026-11-01T00:33:00Z", "payload": {}}
+{"contract_id": 9, "device_id": "sim-01", "event_id": "1ac724d7-eb7c-44f6-bf06-529b48a1a990-000003-4", "event_type": "position", "observed_at": "2026-11-01T00:34:00Z", "payload": {"latitude": 0.01, "longitude": 0.02}}
+{"contract_id": 1, "device_id": "sim-01", "event_id": "1ac724d7-eb7c-44f6-bf06-529b48a1a990-000003-0", "event_type": "withdrawal", "observed_at": "2026-11-01T00:30:00Z", "payload": {}}
+{"contract_id": 1, "device_id": "sim-01", "event_id": "1ac724d7-eb7c-44f6-bf06-529b48a1a990-000003-0", "event_type": "incident", "observed_at": "2026-11-01T00:30:00Z", "payload": {}}
+{"contract_id": 6, "device_id": "sim-01", "event_id": "1ac724d7-eb7c-44f6-bf06-529b48a1a990-000003-1-late", "event_type": "return", "observed_at": "2026-11-01T00:00:00Z", "payload": {}}
+{"contract_id": 1001200, "device_id": "sim-01", "event_id": "1ac724d7-eb7c-44f6-bf06-529b48a1a990-000003-1-unknown", "event_type": "return", "observed_at": "2026-11-01T00:31:00Z", "payload": {}}
+{"contract_id": 6, "device_id": "sim-01", "event_id": "1ac724d7-eb7c-44f6-bf06-529b48a1a990-000003-1-invalid", "event_type": "return", "observed_at": "2026-02-30T00:00:00Z", "payload": {}}

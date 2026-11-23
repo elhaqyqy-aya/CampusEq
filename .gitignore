@@ -1,14 +1,3 @@
-/.idea
-/Axe 1 — SQL Analytique et Optimisation.pdf
-/Axe_2_Cahier_etudiant.pdf
-/campusequip-kit-axes-3-4.zip
-/campusequip-kit-etudiant.zip
-/CampusEquip_etudiant
-/Projet_final_Sujet_etudiant_axes_3_4.pdf
-/shopflow-axe1-simulation-SQL.zip
-/shopflow-axe2-simulation-Python.zip
-/ShopFlow-Python-cours.pdf
-/ShopFlow-SQL-cours.pdf
-/ShopFlow_Activite_Guidee_Pandas_API_Dask.pdf
-/ShopFlow_Guide_Demarrage.pdf
-/Sujet_CampusEquip_axes1_2.pdf
+.idea/
+.DS_Store
+Thumbs.db

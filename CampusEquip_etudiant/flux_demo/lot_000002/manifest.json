@@ -1,0 +1,13 @@
+{
+  "schema_version": "campusequip-v2",
+  "campaign_id": "d21d5f82-f208-46fb-9ea0-279d2193c87c",
+  "batch_number": 2,
+  "created_at": "2026-11-04T20:57:52.158144+00:00",
+  "contracts_requested": 300,
+  "rows": 626,
+  "profile": "mixte",
+  "files": {
+    "locations.csv": "b417e08808d6a54281453b54c421885deff0c9ed8b155c586666e3bf3ab6add8",
+    "referentiels.json": "d5ee8c3c7482350d6d88f5427ace1a2d30253441b96ae26ef2756020af34d189"
+  }
+}

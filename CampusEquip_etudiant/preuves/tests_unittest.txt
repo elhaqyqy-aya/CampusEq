@@ -1,0 +1,46 @@
+test_taux_superieur_a_20_pourcent_alerte_mais_charge_le_reste (tests.test_pipeline.TestAlerteQualite.test_taux_superieur_a_20_pourcent_alerte_mais_charge_le_reste) ... ok
+test_montants_heure_et_journee_et_statuts (tests.test_pipeline.TestChargementValide.test_montants_heure_et_journee_et_statuts) ... ok
+test_colonne_supplementaire_refusee (tests.test_pipeline.TestQuarantaine.test_colonne_supplementaire_refusee) ... ok
+test_entete_contradictoire_et_reference_inconnue (tests.test_pipeline.TestQuarantaine.test_entete_contradictoire_et_reference_inconnue) ... ok
+test_manifeste_incoherent_avec_les_fichiers (tests.test_pipeline.TestQuarantaine.test_manifeste_incoherent_avec_les_fichiers) ... ok
+test_quantite_invalide_et_quantite_25 (tests.test_pipeline.TestQuarantaine.test_quantite_invalide_et_quantite_25) ... ok
+test_repetition_confirmee_et_conflit_de_cle (tests.test_pipeline.TestQuarantaine.test_repetition_confirmee_et_conflit_de_cle) ... ok
+test_structure_invalide_refusee_avant_ecriture (tests.test_pipeline.TestQuarantaine.test_structure_invalide_refusee_avant_ecriture) ... ok
+test_une_ligne_invalide_isole_toutes_les_lignes_du_contrat (tests.test_pipeline.TestQuarantaine.test_une_ligne_invalide_isole_toutes_les_lignes_du_contrat) ... ok
+test_campagne_differente_refusee (tests.test_pipeline.TestRejeuEtConflit.test_campagne_differente_refusee) ... ok
+test_dossier_renomme_reconnu_comme_rejeu (tests.test_pipeline.TestRejeuEtConflit.test_dossier_renomme_reconnu_comme_rejeu) ... ok
+test_nouveau_lot_reutilisant_un_contrat_echoue_sans_rien_ecrire (tests.test_pipeline.TestRejeuEtConflit.test_nouveau_lot_reutilisant_un_contrat_echoue_sans_rien_ecrire) ... ok
+test_referentiels_modifies_refuses (tests.test_pipeline.TestRejeuEtConflit.test_referentiels_modifies_refuses) ... ok
+test_rejeu_identique_ne_double_rien (tests.test_pipeline.TestRejeuEtConflit.test_rejeu_identique_ne_double_rien) ... ok
+test_cle_de_ligne_en_conflit_isole_tout_le_contrat (tests.test_regles.TestAnalyseLot.test_cle_de_ligne_en_conflit_isole_tout_le_contrat) ... ok
+test_entete_de_contrat_contradictoire (tests.test_regles.TestAnalyseLot.test_entete_de_contrat_contradictoire) ... ok
+test_ligne_mal_formee_ne_casse_pas_l_analyse (tests.test_regles.TestAnalyseLot.test_ligne_mal_formee_ne_casse_pas_l_analyse) ... ok
+test_montant_heure_et_journee (tests.test_regles.TestAnalyseLot.test_montant_heure_et_journee) ... ok
+test_quantite_invalide_et_quantite_25 (tests.test_regles.TestAnalyseLot.test_quantite_invalide_et_quantite_25) ... ok
+test_reference_inconnue_met_le_contrat_en_quarantaine (tests.test_regles.TestAnalyseLot.test_reference_inconnue_met_le_contrat_en_quarantaine) ... ok
+test_repetition_exacte_comptee_une_fois (tests.test_regles.TestAnalyseLot.test_repetition_exacte_comptee_une_fois) ... ok
+test_taux_de_rejet_apres_dedoublonnage (tests.test_regles.TestAnalyseLot.test_taux_de_rejet_apres_dedoublonnage) ... ok
+test_date_iso_stricte (tests.test_regles.TestParseurs.test_date_iso_stricte) ... ok
+test_duree_depend_de_l_unite (tests.test_regles.TestParseurs.test_duree_depend_de_l_unite) ... ok
+test_entier_positif_accepte_les_espaces_peripheriques (tests.test_regles.TestParseurs.test_entier_positif_accepte_les_espaces_peripheriques) ... ok
+test_entier_positif_refuse_tout_le_reste (tests.test_regles.TestParseurs.test_entier_positif_refuse_tout_le_reste) ... ok
+test_normalisation_limitee (tests.test_regles.TestParseurs.test_normalisation_limitee) ... ok
+test_tarif_deux_decimales_maximum (tests.test_regles.TestParseurs.test_tarif_deux_decimales_maximum) ... ok
+test_tarif_refuse_ce_qui_changerait_le_sens (tests.test_regles.TestParseurs.test_tarif_refuse_ce_qui_changerait_le_sens) ... ok
+test_empreinte_independante_de_l_ordre_des_cles (tests.test_regles.TestReferentiels.test_empreinte_independante_de_l_ordre_des_cles) ... ok
+test_referentiel_incoherent_refuse (tests.test_regles.TestReferentiels.test_referentiel_incoherent_refuse) ... ok
+test_signature_depend_du_contenu_et_des_regles (tests.test_regles.TestSignature.test_signature_depend_du_contenu_et_des_regles) ... ok
+test_signature_refuse_une_empreinte_invalide (tests.test_regles.TestSignature.test_signature_refuse_une_empreinte_invalide) ... ok
+test_signature_stable (tests.test_regles.TestSignature.test_signature_stable) ... ok
+test_debit_invalide_ne_reserve_pas_de_numero (tests.test_stress.TestGenerationStress.test_debit_invalide_ne_reserve_pas_de_numero) ... ok
+test_generateur_habituel_garde_son_manifest_et_ses_lignes (tests.test_stress.TestGenerationStress.test_generateur_habituel_garde_son_manifest_et_ses_lignes) ... ok
+test_lot_de_charge_contient_exactement_le_nombre_demande (tests.test_stress.TestGenerationStress.test_lot_de_charge_contient_exactement_le_nombre_demande) ... ok
+test_paliers_separes_et_valides (tests.test_stress.TestGenerationStress.test_paliers_separes_et_valides) ... ok
+test_page_api_et_execution_isolee (tests.test_stress.TestStressDashboard.test_page_api_et_execution_isolee) ... ok
+test_structure_invalide_est_un_echec_visible (tests.test_surveillance.TestSurveillanceContinue.test_structure_invalide_est_un_echec_visible) ... ok
+test_trois_lots_pris_en_charge_sans_redemarrage (tests.test_surveillance.TestSurveillanceContinue.test_trois_lots_pris_en_charge_sans_redemarrage) ... ok
+
+----------------------------------------------------------------------
+Ran 41 tests in 17.291s
+
+OK

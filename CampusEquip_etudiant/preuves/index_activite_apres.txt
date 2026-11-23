@@ -1,0 +1,35 @@
+-- Avec index (activite)
+GroupAggregate (actual time=3.516..3.520 rows=1 loops=1)
+  Group Key: s.campus_id, c2.name
+  Buffers: shared hit=1395
+  ->  Sort (actual time=3.191..3.259 rows=1389 loops=1)
+        Sort Key: s.campus_id, c2.name, c.site_id
+        Sort Method: quicksort  Memory: 103kB
+        Buffers: shared hit=1395
+        ->  Hash Join (actual time=0.451..2.731 rows=1389 loops=1)
+              Hash Cond: (s.campus_id = c2.campus_id)
+              Buffers: shared hit=1395
+              ->  Nested Loop (actual time=0.432..2.353 rows=1389 loops=1)
+                    Buffers: shared hit=1394
+                    ->  Bitmap Heap Scan on contracts c (actual time=0.422..1.667 rows=1389 loops=1)
+                          Recheck Cond: ((start_date = '2026-11-06'::date) AND (status = ANY ('{paid,closed}'::text[])))
+                          Heap Blocks: exact=1389
+                          Buffers: shared hit=1392
+                          ->  Bitmap Index Scan on ix_contracts_ret (actual time=0.225..0.225 rows=1389 loops=1)
+                                Index Cond: (start_date = '2026-11-06'::date)
+                                Buffers: shared hit=3
+                    ->  Memoize (actual time=0.000..0.000 rows=1 loops=1389)
+                          Cache Key: c.site_id
+                          Cache Mode: logical
+                          Hits: 1388  Misses: 1  Evictions: 0  Overflows: 0  Memory Usage: 1kB
+                          Buffers: shared hit=2
+                          ->  Index Scan using sites_pkey on sites s (actual time=0.005..0.005 rows=1 loops=1)
+                                Index Cond: (site_id = c.site_id)
+                                Buffers: shared hit=2
+              ->  Hash (actual time=0.015..0.016 rows=6 loops=1)
+                    Buckets: 2048  Batches: 1  Memory Usage: 17kB
+                    Buffers: shared hit=1
+                    ->  Seq Scan on campus c2 (actual time=0.010..0.011 rows=6 loops=1)
+                          Buffers: shared hit=1
+Planning Time: 0.271 ms
+Execution Time: 3.642 ms

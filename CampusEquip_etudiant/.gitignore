@@ -1,0 +1,27 @@
+# Secrets et environnement local — ne jamais versionner
+.env
+.venv/
+venv/
+
+# Sorties de travail
+.tests_tmp/
+.demo/
+/axes_3_4/flux_ui/
+.dsh-office-*/
+_apercu/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Sorties regenerables a l'execution
+/rapports/*
+!/rapports/.gitkeep
+/quarantaine/*
+!/quarantaine/.gitkeep
+/resultats/*
+!/resultats/.gitkeep
+
+# Supports de cours non necessaires au clonage ou a l'execution
+/Projet_final_Sujet_etudiant.pdf
+/Projet_final_Sujet_etudiant.docx
+/Sujet_CampusEquip_axes_1_2.md

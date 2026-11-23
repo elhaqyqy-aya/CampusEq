@@ -1,0 +1,11 @@
+{
+  "schema_version": "campusequip-events-1",
+  "campaign_id": "1ac724d7-eb7c-44f6-bf06-529b48a1a990",
+  "batch_no": 2,
+  "profile": "mixte",
+  "rows": 10,
+  "files": {
+    "evenements.jsonl": "af845f315da2d7c3a2e89eb50d946dc26910daa59dd38e627e5b953b1ca17aab"
+  },
+  "contracts_sha256": "10a3d9256949f74697b63270c1c50e7a78c9465422d64c6d1f31ac2b97342310"
+}

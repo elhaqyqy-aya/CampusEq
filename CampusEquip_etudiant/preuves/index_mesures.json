@@ -1,0 +1,27 @@
+{
+  "contrats": 250000,
+  "lignes": 500000,
+  "volume_secondes": 0.2,
+  "requetes": [
+    {
+      "nom": "Activité d’une journée (comptage)",
+      "avant": 53.67,
+      "apres": 3.64,
+      "gain": 15,
+      "gain_sur": "comptage",
+      "identique": true,
+      "largeur_avant": 25.4,
+      "largeur_apres": 1.7
+    },
+    {
+      "nom": "Montant d’une journée (agrégation)",
+      "avant": 211.04,
+      "apres": 119.24,
+      "gain": 1.8,
+      "gain_sur": "agrégation",
+      "identique": true,
+      "largeur_avant": 100.0,
+      "largeur_apres": 56.5
+    }
+  ]
+}

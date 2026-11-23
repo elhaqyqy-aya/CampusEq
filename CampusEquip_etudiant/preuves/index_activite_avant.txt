@@ -1,0 +1,32 @@
+-- Sans index (activite)
+GroupAggregate (actual time=53.564..53.567 rows=1 loops=1)
+  Group Key: s.campus_id, c2.name
+  Buffers: shared hit=1596
+  ->  Sort (actual time=53.230..53.303 rows=1389 loops=1)
+        Sort Key: s.campus_id, c2.name, c.site_id
+        Sort Method: quicksort  Memory: 103kB
+        Buffers: shared hit=1596
+        ->  Hash Join (actual time=0.091..52.627 rows=1389 loops=1)
+              Hash Cond: (s.campus_id = c2.campus_id)
+              Buffers: shared hit=1596
+              ->  Nested Loop (actual time=0.066..52.115 rows=1389 loops=1)
+                    Buffers: shared hit=1595
+                    ->  Seq Scan on contracts c (actual time=0.050..51.041 rows=1389 loops=1)
+                          Filter: ((status = ANY ('{paid,closed}'::text[])) AND (start_date = '2026-11-06'::date))
+                          Rows Removed by Filter: 248611
+                          Buffers: shared hit=1593
+                    ->  Memoize (actual time=0.000..0.000 rows=1 loops=1389)
+                          Cache Key: c.site_id
+                          Cache Mode: logical
+                          Hits: 1388  Misses: 1  Evictions: 0  Overflows: 0  Memory Usage: 1kB
+                          Buffers: shared hit=2
+                          ->  Index Scan using sites_pkey on sites s (actual time=0.011..0.011 rows=1 loops=1)
+                                Index Cond: (site_id = c.site_id)
+                                Buffers: shared hit=2
+              ->  Hash (actual time=0.013..0.014 rows=6 loops=1)
+                    Buckets: 2048  Batches: 1  Memory Usage: 17kB
+                    Buffers: shared hit=1
+                    ->  Seq Scan on campus c2 (actual time=0.008..0.009 rows=6 loops=1)
+                          Buffers: shared hit=1
+Planning Time: 0.239 ms
+Execution Time: 53.671 ms
