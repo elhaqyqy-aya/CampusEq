@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import badge_statut, vide %}
+
+{% block contenu %}
+
+<article class="panneau">
+  <div class="entete-page">
+    <div>
+      <h2 style="margin:0; font-size:12.5px; font-weight:600">Contrats de la période</h2>
+      <p class="aide" style="margin-top:4px">
+        {{ contrats|length }} affiché(s) · {{ total.contrats_stockes|decimales(0) }} stockés ·
+        {{ total.contrats_retenus|decimales(0) }} retenus dans les indicateurs
+      </p>
+    </div>
+    <form method="get" action="{{ url_for('contrats') }}" class="filtres" style="align-items:flex-end">
+      <input type="hidden" name="debut" value="{{ filtres.debut.isoformat() }}">
+      <input type="hidden" name="fin" value="{{ filtres.fin.isoformat() }}">
+      {% if filtres.campus_id %}<input type="hidden" name="campus" value="{{ filtres.campus_id }}">{% endif %}
+      <div class="champ">
+        <label for="q">N° de contrat</label>
+        <input type="search" id="q" name="q" placeholder="ex. 1024" value="{{ recherche or '' }}"
+               style="min-width:116px">
+      </div>
+      <div class="champ">
+        <label for="statut">Statut</label>
+        <select id="statut" name="statut">
+          <option value="">Tous</option>
+          {% for valeur, libelle in [('paid','Payé'), ('closed','Clôturé'), ('draft','Brouillon'), ('cancelled','Annulé')] %}
+          <option value="{{ valeur }}" {{ 'selected' if statut == valeur }}>{{ libelle }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <button class="bouton" type="submit">Filtrer</button>
+    </form>
+  </div>
+
+  <table class="tableau" style="margin-top:14px">
+    <thead>
+      <tr>
+        <th>Contrat</th><th>Début</th><th>Client</th><th>Guichet</th>
+        <th>Statut</th><th class="nombre">Lignes</th><th class="nombre">Montant</th><th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for ligne in contrats %}
+      <tr>
+        <td class="fort mono">{{ ligne.contract_id }}</td>
+        <td>{{ ligne.start_date|datefr }}</td>
+        <td>{{ ligne.client }}</td>
+        <td>{{ ligne.site }}</td>
+        <td>{{ badge_statut(ligne.status) }}</td>
+        <td class="nombre">{{ ligne.lignes }}</td>
+        <td class="nombre">{{ ligne.montant|montant }}</td>
+        <td class="nombre">
+          <a class="lien" data-navigation
+             href="{{ url_for('contrat', contract_id=ligne.contract_id, **liens) }}">Ouvrir</a>
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="8">{{ vide('Aucun contrat ne correspond à ces filtres.',
+                                  'Changez de statut ou élargissez la période.') }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</article>
+
+{% endblock %}

@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import kpi, kpi_texte, badge, vide %}
+
+{% block contenu %}
+
+<section class="grille kpi">
+  {{ kpi('Lots chargés', indicateurs.lots, '', 'une campagne par base') }}
+  {{ kpi('Lots refusés', indicateurs.refus, '', 'structure invalide, zéro écriture') }}
+  {{ kpi('Lignes acceptées', indicateurs.acceptees, '', 'écrites dans la transaction') }}
+  {{ kpi_texte('Dernier chargement',
+               indicateurs.dernier.strftime('%H:%M') if indicateurs.dernier else '—',
+               indicateurs.dernier|datefr if indicateurs.dernier else 'aucun lot') }}
+</section>
+
+<section class="grille duo">
+  <article class="panneau">
+    <div class="panneau-entete">
+      <h2>Journal des lots</h2>
+      <span class="note">ingestion_batches</span>
+    </div>
+    <div class="defile" style="max-height:520px">
+      <table class="tableau">
+        <thead>
+          <tr>
+            <th>Lot</th><th>Statut</th><th>Campagne</th><th class="nombre">Reçues</th>
+            <th class="nombre">Doublons</th><th class="nombre">Acceptées</th>
+            <th class="nombre">Rejetées</th><th class="nombre">Taux</th><th>Chargé le</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for lot in journal %}
+          <tr>
+            <td class="fort mono">{{ '%06d'|format(lot.batch_number) }}</td>
+            <td>{{ badge(lot.status) }}</td>
+            <td class="mono" style="color:var(--muet); font-size:10.5px"
+                title="{{ lot.campaign_id }}">{{ lot.campaign_id[:8] }}…</td>
+            <td class="nombre">{{ lot.rows_received }}</td>
+            <td class="nombre">{{ lot.rows_deduplicated }}</td>
+            <td class="nombre">{{ lot.rows_accepted }}</td>
+            <td class="nombre">{{ lot.rows_rejected }}</td>
+            <td class="nombre">{{ lot.rejection_rate|pourcent }}</td>
+            <td class="mono" style="font-size:10.5px">{{ lot.charge_le|heurefr if lot.charge_le else '—' }}</td>
+          </tr>
+          {% else %}
+          <tr><td colspan="9">{{ vide('Journal vide.', 'Lancez python -m outils.demo.') }}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </article>
+
+  <article class="panneau">
+    <div class="panneau-entete">
+      <h2>Activité récente</h2>
+      <span class="note">temps réel</span>
+    </div>
+    <div class="flux-liste" id="flux-activite">
+      {% include '_flux.html' %}
+    </div>
+    <p class="aide">
+      La signature d’un lot combine les empreintes SHA-256 des deux fichiers et la
+      version des règles : un lot rejoué, même renommé, est reconnu
+      <code>DEJA_CHARGE</code> et n’ajoute aucune ligne.
+    </p>
+  </article>
+</section>
+
+<section class="grille duo-inverse">
+  <article class="panneau">
+    <div class="panneau-entete">
+      <h2>Base de données</h2>
+      <span class="note">session READ ONLY</span>
+    </div>
+    <dl class="fiche" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+      <div><dt>Base</dt><dd class="mono">{{ sante.base }}</dd></div>
+      <div><dt>Version</dt><dd>PostgreSQL {{ sante.version }}</dd></div>
+      <div><dt>Contrats</dt><dd class="mono">{{ sante.contrats|decimales(0) }}</dd></div>
+      <div><dt>Lots chargés</dt><dd class="mono">{{ sante.lots }}</dd></div>
+    </dl>
+    <p class="aide">
+      La console ouvre une session PostgreSQL <code>READ ONLY</code> : elle ne peut
+      ni insérer, ni modifier, ni supprimer.
+    </p>
+  </article>
+
+  <article class="panneau">
+    <div class="panneau-entete">
+      <h2>Source IoT</h2>
+      {% if iot.disponible %}<span class="badge info">active</span>
+      {% else %}<span class="badge neutre">non exécutée</span>{% endif %}
+    </div>
+    {% if iot.disponible %}
+    <p class="aide" style="margin-top:0">
+      {{ iot.total|decimales(0) }} observations dans <code>iot_observations</code>.
+    </p>
+    <table class="tableau">
+      <thead><tr><th>Boîtier</th><th>Équipement</th><th>Observé le</th></tr></thead>
+      <tbody>
+        {% for ligne in iot.lignes %}
+        <tr>
+          <td class="mono">{{ ligne.device_id }}</td>
+          <td class="mono">{{ ligne.equipment_id }}</td>
+          <td class="mono" style="font-size:10.5px">{{ ligne.observed_at|heurefr }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    {{ vide('Le bonus IoT n’a pas tourné sur cette base.', 'python -m outils.preuve_iot') }}
+    {% endif %}
+  </article>
+</section>
+
+{% endblock %}

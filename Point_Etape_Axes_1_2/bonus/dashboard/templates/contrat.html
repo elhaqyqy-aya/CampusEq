@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import badge_statut %}
+
+{% block contenu %}
+
+<article class="panneau">
+  <div class="panneau-entete">
+    <h2>Contrat {{ detail.entete.contract_id }}</h2>
+    <div style="display:flex; gap:8px; align-items:center">
+      {{ badge_statut(detail.entete.status) }}
+      {% if detail.entete.status in ('paid', 'closed') %}
+      <span class="badge ok">compté</span>
+      {% else %}
+      <span class="badge neutre">exclu</span>
+      {% endif %}
+    </div>
+  </div>
+
+  <dl class="fiche">
+    <div><dt>Début</dt><dd>{{ detail.entete.start_date|datefr }}</dd></div>
+    <div><dt>Client</dt><dd>{{ detail.entete.client }}</dd></div>
+    <div><dt>Campus</dt><dd>{{ detail.entete.campus }}</dd></div>
+    <div><dt>Guichet</dt><dd>{{ detail.entete.site }}</dd></div>
+    <div><dt>Lot source</dt><dd class="mono">{{ '%06d'|format(detail.entete.batch_number) }}</dd></div>
+    <div><dt>Statut</dt><dd class="mono">{{ detail.entete.status }}</dd></div>
+  </dl>
+</article>
+
+<article class="panneau">
+  <div class="panneau-entete">
+    <h2>Lignes du contrat</h2>
+    <span class="note">{{ detail.lignes|length }} ligne(s)</span>
+  </div>
+  <table class="tableau">
+    <thead>
+      <tr>
+        <th>N°</th><th>Équipement</th><th>Catégorie</th>
+        <th class="nombre">Quantité</th><th class="nombre">Durée</th><th>Unité</th>
+        <th class="nombre">Tarif</th><th>Calcul</th><th class="nombre">Montant</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for ligne in detail.lignes %}
+      <tr>
+        <td class="mono">{{ ligne.line_no }}</td>
+        <td class="fort">{{ ligne.equipement }}</td>
+        <td>{{ ligne.categorie }}</td>
+        <td class="nombre">{{ ligne.quantity }}</td>
+        <td class="nombre">{{ ligne.duration }}</td>
+        <td>{{ 'heure' if ligne.unit == 'hour' else 'jour' }}</td>
+        <td class="nombre">{{ ligne.unit_rate|decimales(2) }}</td>
+        <td class="mono" style="color:var(--muet)">
+          {{ ligne.quantity }} × {{ ligne.duration }} × {{ ligne.unit_rate|decimales(2) }}
+        </td>
+        <td class="nombre">{{ ligne.line_amount|montant }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="total-ligne">
+    <span>Total du contrat
+      {% if detail.entete.status not in ('paid', 'closed') %}
+      <span class="badge neutre" style="margin-left:8px">hors indicateurs</span>
+      {% endif %}
+    </span>
+    <b>{{ detail.total|montant }} MAD</b>
+  </div>
+  <p class="aide">
+    Le montant est calculé par PostgreSQL (colonne générée
+    <code>quantity × duration × unit_rate</code>) : il ne peut pas diverger du
+    tarif historique reçu.
+  </p>
+</article>
+
+{% endblock %}

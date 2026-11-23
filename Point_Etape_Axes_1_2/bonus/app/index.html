@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f3efe6">
+    <meta name="description" content="CampusEquip — an equipment operations prototype for multi-campus teams.">
+    <title>CampusEquip — Field office</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css?v=4">
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Primary navigation">
+        <a class="brand" href="#" aria-label="CampusEquip home">
+          <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+          <span class="brand-name">campus<span>equip</span></span>
+        </a>
+        <div class="side-caption">FIELD OFFICE <span>01—04</span></div>
+        <nav class="side-nav" id="primary-nav"></nav>
+        <div class="sidebar-bottom">
+          <div class="pipeline-mini">
+            <span class="signal-dot"></span>
+            <div><strong>Pipeline preview</strong><small>Illustrative · not connected</small></div>
+            <span class="mini-arrow">↗</span>
+          </div>
+          <button class="profile-button" id="profile-button" type="button">
+            <span class="avatar" id="profile-avatar">AD</span>
+            <span class="profile-copy"><strong id="profile-name">Amina Diallo</strong><small id="profile-title">Network administrator</small></span>
+            <span class="profile-menu-mark">⌄</span>
+          </button>
+        </div>
+      </aside>
+
+      <main class="main-shell">
+        <header class="topbar">
+          <div class="breadcrumbs"><span>CampusEquip</span><span class="crumb-slash">/</span><strong id="breadcrumb-current">Overview</strong></div>
+          <div class="topbar-tools">
+            <span class="demo-label" id="connection-status"><i></i> CONNECTING</span>
+            <button class="text-button" type="button" id="refresh-data" aria-label="Refresh project data" title="Refresh project data">↻ Refresh</button>
+            <label class="role-control" for="role-select"><span>Preview role</span>
+              <select id="role-select" aria-label="Preview role">
+                <option value="admin">Administrator</option>
+                <option value="manager">Campus manager</option>
+                <option value="staff">Staff</option>
+              </select>
+            </label>
+            <button class="icon-button mobile-menu" type="button" id="mobile-menu" aria-label="Open navigation">☰</button>
+          </div>
+        </header>
+        <div class="prototype-banner">
+          <span class="banner-glyph">i</span>
+          <span>Prototype mode. Figures are illustrative; actions stay in this browser and do not write to the CampusEquip pipeline.</span>
+          <button type="button" id="dismiss-banner" aria-label="Dismiss notice">×</button>
+        </div>
+        <section id="page-content" class="page-content" aria-live="polite"></section>
+        <footer class="page-footer">
+          <span>CAMPUS EQUIP <b>·</b> FIELD OPERATIONS</span>
+          <span id="data-boundary">CONNECTING TO PROJECT DATA · READ ONLY</span>
+        </footer>
+      </main>
+    </div>
+    <div id="toast-region" class="toast-region" aria-live="polite" aria-atomic="true"></div>
+    <dialog id="operation-dialog" class="operation-dialog">
+      <form method="dialog" class="dialog-close-form"><button class="icon-button" aria-label="Close dialog">×</button></form>
+      <div id="dialog-content"></div>
+    </dialog>
+    <script type="module" src="./app.js?v=5"></script>
+  </body>
+</html>

@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+
+{% block contenu %}
+<section class="gps-shell" id="gps-dashboard" aria-labelledby="gps-title">
+  <header class="gps-hero">
+    <div class="gps-hero-copy">
+      <p class="gps-eyebrow"><span class="gps-pulse"></span> FLOTTE CONNECTÉE <span class="gps-eyebrow-sep">/</span> SIMULATION IoT</p>
+      <h2 id="gps-title">Le mouvement,<br><em>en temps réel.</em></h2>
+      <p class="gps-intro">Cinq traceurs virtuels parcourent des itinéraires urbains marocains. Chaque position, alerte et mesure est simulée et enregistrée dans PostgreSQL.</p>
+    </div>
+    <div class="gps-hero-panel">
+      <div class="gps-period-label">SESSION DE SIMULATION <span class="gps-status-pill" id="gps-run-state">Connexion…</span></div>
+      <div class="gps-controls" role="toolbar" aria-label="Commandes de la simulation GPS">
+        <button type="button" class="gps-button gps-button-start" data-action="start" id="gps-start">▶ <span>Démarrer</span></button>
+        <button type="button" class="gps-button" data-action="pause" id="gps-pause" disabled>Ⅱ <span>Pause</span></button>
+        <button type="button" class="gps-button gps-button-icon" data-action="reset" id="gps-reset" aria-label="Réinitialiser la simulation" title="Réinitialiser">↻</button>
+        <label class="gps-speed-control" for="gps-speed">VITESSE
+          <select id="gps-speed" aria-label="Vitesse de simulation">
+            <option value="0.5">0,5×</option>
+            <option value="1" selected>1×</option>
+            <option value="2">2×</option>
+            <option value="4">4×</option>
+            <option value="8">8×</option>
+          </select>
+        </label>
+      </div>
+      <p class="gps-session-note"><span class="gps-session-dot"></span> Données virtuelles · routes fixes · aucune balise physique</p>
+    </div>
+  </header>
+
+  <div class="gps-error" id="gps-error" role="alert" hidden></div>
+
+  <div class="gps-kpis" aria-label="Indicateurs de la flotte">
+    <article class="gps-kpi gps-kpi-dark">
+      <div class="gps-kpi-top"><span>Appareils suivis</span><span class="gps-kpi-mark">FLEET</span></div>
+      <strong id="gps-kpi-total">—</strong>
+      <small>traceurs virtuels enregistrés</small>
+    </article>
+    <article class="gps-kpi gps-kpi-teal">
+      <div class="gps-kpi-top"><span>Connectés</span><span class="gps-kpi-symbol">↗</span></div>
+      <strong id="gps-kpi-online">—</strong>
+      <small id="gps-kpi-online-caption">en attente de télémétrie</small>
+    </article>
+    <article class="gps-kpi gps-kpi-ivory">
+      <div class="gps-kpi-top"><span>En mouvement</span><span class="gps-kpi-symbol">⌁</span></div>
+      <strong id="gps-kpi-moving">—</strong>
+      <small>vitesse supérieure à 0 km/h</small>
+    </article>
+    <article class="gps-kpi gps-kpi-orange">
+      <div class="gps-kpi-top"><span>Vitesse moyenne</span><span class="gps-kpi-symbol">km/h</span></div>
+      <strong id="gps-kpi-speed">—</strong>
+      <small>sur les appareils connectés</small>
+    </article>
+    <article class="gps-kpi gps-kpi-lavender">
+      <div class="gps-kpi-top"><span>Batterie faible</span><span class="gps-kpi-symbol">!</span></div>
+      <strong id="gps-kpi-battery">—</strong>
+      <small>seuil d’alerte ≤ 25 %</small>
+    </article>
+  </div>
+
+  <div class="gps-main-grid">
+    <section class="gps-map-panel" aria-labelledby="gps-map-title">
+      <div class="gps-section-heading gps-map-heading">
+        <div><p class="gps-section-kicker">GÉOGRAPHIE EN DIRECT</p><h3 id="gps-map-title">Réseau de véhicules</h3></div>
+        <div class="gps-map-legend"><span><i class="gps-legend-dot online"></i> En ligne</span><span><i class="gps-legend-dot weak"></i> Signal faible</span><span><i class="gps-legend-dot offline"></i> Hors ligne</span></div>
+      </div>
+      <div class="gps-map-wrap">
+        <div id="gps-map" class="gps-map" role="application" aria-label="Carte interactive des appareils GPS"></div>
+        <div class="gps-map-loading" id="gps-map-loading" role="status">Chargement de la carte…</div>
+        <div class="gps-map-attribution-note">OpenStreetMap · positions simulées</div>
+        <div class="gps-map-draw-hint" id="gps-draw-hint" hidden>Cliquez sur la carte pour choisir le centre de la zone</div>
+      </div>
+      <div class="gps-map-footer"><span><i class="gps-live-dot"></i> Actualisation automatique</span><span id="gps-map-updated">En attente du premier point</span></div>
+    </section>
+
+    <aside class="gps-detail-panel" aria-labelledby="gps-detail-title">
+      <div class="gps-section-heading">
+        <div><p class="gps-section-kicker">FICHE APPAREIL</p><h3 id="gps-detail-title">Sélectionnez un traceur</h3></div>
+        <span class="gps-detail-status" id="gps-detail-status">—</span>
+      </div>
+      <div class="gps-detail-content" id="gps-detail-content">
+        <div class="gps-detail-empty"><span aria-hidden="true">⌖</span><p>Choisissez un marqueur ou une ligne du tableau pour afficher les coordonnées et l’historique de route.</p></div>
+      </div>
+      <div class="gps-history-block">
+        <div class="gps-history-heading"><span>TRACE RÉCENT</span><span id="gps-history-count">0 points</span></div>
+        <svg id="gps-history-chart" class="gps-history-chart" viewBox="0 0 320 88" role="img" aria-label="Historique récent du parcours sélectionné"></svg>
+      </div>
+    </aside>
+  </div>
+
+  <div class="gps-lower-grid">
+    <section class="gps-table-panel" aria-labelledby="gps-table-title">
+      <div class="gps-section-heading gps-table-heading">
+        <div><p class="gps-section-kicker">INVENTAIRE · TÉLÉMÉTRIE</p><h3 id="gps-table-title">Appareils</h3></div>
+        <div class="gps-table-tools">
+          <label class="gps-search"><span aria-hidden="true">⌕</span><input id="gps-filter" type="search" placeholder="Filtrer les appareils" aria-label="Filtrer les appareils"></label>
+          <label class="gps-sort-label" for="gps-sort">Trier
+            <select id="gps-sort">
+              <option value="device_id">Identifiant</option>
+              <option value="speed_kmh">Vitesse</option>
+              <option value="battery_pct">Batterie</option>
+              <option value="signal_strength">Signal</option>
+            </select>
+          </label>
+        </div>
+      </div>
+      <div class="gps-table-scroll">
+        <table class="gps-device-table">
+          <thead><tr><th>APPAREIL</th><th>ÉTAT</th><th>VITESSE</th><th>CAP</th><th>BATTERIE</th><th>DERNIÈRE MESURE</th></tr></thead>
+          <tbody id="gps-device-rows"><tr><td colspan="6" class="gps-table-empty">Chargement de la flotte…</td></tr></tbody>
+        </table>
+      </div>
+      <p class="gps-table-footnote">Le signal, la batterie et les coordonnées sont des mesures simulées. Les événements et points de télémétrie sont persistés.</p>
+    </section>
+
+    <div class="gps-side-stack">
+      <section class="gps-geofence-panel" aria-labelledby="gps-geofence-title">
+        <div class="gps-section-heading">
+          <div><p class="gps-section-kicker">SÉCURITÉ DE ZONE</p><h3 id="gps-geofence-title">Géorepérage</h3></div>
+          <button type="button" class="gps-text-button" data-action="draw-fence" id="gps-draw-button">＋ Placer sur la carte</button>
+        </div>
+        <p class="gps-panel-note">Cliquez sur la carte pour définir un centre, puis enregistrez le rayon.</p>
+        <form class="gps-fence-form" id="gps-fence-form">
+          <label>Nom de la zone<input name="name" maxlength="80" placeholder="Ex. Dépôt central" required></label>
+          <div class="gps-fence-row">
+            <label>Rayon (m)<input name="radius_m" type="number" min="50" max="10000" step="10" value="150" required></label>
+            <button type="submit" class="gps-button gps-save-fence" id="gps-save-fence" disabled>Créer la zone</button>
+          </div>
+          <input type="hidden" name="latitude">
+          <input type="hidden" name="longitude">
+          <p class="gps-fence-center" id="gps-fence-center">Aucun centre sélectionné</p>
+        </form>
+        <div class="gps-geofence-list" id="gps-geofence-list"><p class="gps-empty-note">Chargement des zones…</p></div>
+      </section>
+      <section class="gps-events-panel" aria-labelledby="gps-events-title">
+        <div class="gps-section-heading">
+          <div><p class="gps-section-kicker">JOURNAL DE ZONE</p><h3 id="gps-events-title">Alertes récentes</h3></div>
+          <span class="gps-event-counter" id="gps-event-count">0</span>
+        </div>
+        <div class="gps-event-list" id="gps-event-list"><p class="gps-empty-note">Aucune entrée ou sortie détectée.</p></div>
+      </section>
+    </div>
+  </div>
+</section>
+{% endblock %}

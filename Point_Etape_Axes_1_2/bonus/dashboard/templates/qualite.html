@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import kpi, badge, vide %}
+
+{% block contenu %}
+
+<section class="grille kpi">
+  {{ kpi('Taux de rejet', indicateurs.taux, '%',
+         indicateurs.rejetees ~ ' rejets sur ' ~ (indicateurs.acceptees + indicateurs.rejetees),
+         '', 1) }}
+  {{ kpi('Contrats isolés', indicateurs.contrats_isoles, '',
+         'une ligne invalide isole tout le contrat') }}
+  {{ kpi('Anomalies', indicateurs.anomalies, '',
+         'lignes acceptées mais signalées') }}
+  {{ kpi('Lots en alerte', indicateurs.alertes, '',
+         'seuil de 20 % dépassé') }}
+</section>
+
+<section class="grille duo">
+  <article class="panneau">
+    <div class="panneau-entete">
+      <h2>Motifs de rejet</h2>
+      <span class="note">premier motif par ligne</span>
+    </div>
+    {{ motifs|safe }}
+    <div style="display:flex; gap:16px; font-size:10.5px; color:var(--muet)">
+      <span><i style="display:inline-block;width:8px;height:8px;border-radius:2px;
+        background:var(--cyan); margin-right:6px"></i>ligne invalide</span>
+      <span><i style="display:inline-block;width:8px;height:8px;border-radius:2px;
+        background:var(--bleu); margin-right:6px"></i>cohérence du contrat</span>
+    </div>
+    <p class="aide">
+      Les motifs <code>CONTRAT_…</code> désignent une ligne saine isolée à cause
+      d’une autre ligne du même contrat : c’est la règle de quarantaine.
+    </p>
+  </article>
+
+  <article class="panneau">
+    <div class="panneau-entete">
+      <h2>Seuil d’alerte</h2>
+      <span class="note">20 %</span>
+    </div>
+    {{ jauge|safe }}
+    <p class="aide">
+      Le taux vaut rejets ÷ lignes après dédoublonnage. Au-delà de 20 %, une alerte
+      est levée : les contrats valides sont chargés, les autres restent isolés.
+    </p>
+  </article>
+</section>
+
+<article class="panneau">
+  <div class="panneau-entete">
+    <h2>Dernières lignes en quarantaine</h2>
+    <span class="note">{{ rejets|length }} ligne(s)</span>
+  </div>
+  <div class="defile">
+    <table class="tableau">
+      <thead>
+        <tr><th>Lot</th><th>Position</th><th>Contrat</th><th>Ligne</th><th>Motif</th></tr>
+      </thead>
+      <tbody>
+        {% for rejet in rejets %}
+        <tr>
+          <td class="mono">{{ '%06d'|format(rejet.batch_number) }}</td>
+          <td class="nombre">{{ rejet.position }}</td>
+          <td class="mono">{{ rejet.contract_id or '—' }}</td>
+          <td class="nombre">{{ rejet.line_no or '—' }}</td>
+          <td>
+            {{ rejet.motifs[0] }}
+            {% if rejet.motifs|length > 1 %}
+            <span class="badge neutre" title="{{ rejet.motifs|join(' | ') }}">
+              +{{ rejet.motifs|length - 1 }}</span>
+            {% endif %}
+          </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="5">{{ vide('Aucune ligne en quarantaine.') }}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</article>
+
+<article class="panneau">
+  <div class="panneau-entete">
+    <h2>Anomalies acceptées</h2>
+    <span class="note">chargées mais signalées</span>
+  </div>
+  <table class="tableau">
+    <thead><tr><th>Lot</th><th>Position</th><th>Contrat</th><th>Code</th><th>Détail</th></tr></thead>
+    <tbody>
+      {% for anomalie in anomalies %}
+      <tr>
+        <td class="mono">{{ '%06d'|format(anomalie.batch_number) }}</td>
+        <td class="nombre">{{ anomalie.position }}</td>
+        <td class="mono">{{ anomalie.contract_id }}</td>
+        <td><span class="badge alerte">{{ anomalie.code }}</span></td>
+        <td>{{ anomalie.detail }}</td>
+      </tr>
+      {% else %}
+      <tr><td colspan="5">{{ vide('Aucune anomalie sur les lots chargés.') }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</article>
+
+{% endblock %}

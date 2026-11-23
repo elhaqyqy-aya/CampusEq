@@ -1,0 +1,39 @@
+{% macro kpi(libelle, valeur, unite='', note='', etincelle='', decimales=0) %}
+<article class="panneau kpi">
+  <p class="kpi-libelle">{{ libelle }}</p>
+  <p class="kpi-valeur" data-valeur="{{ valeur or 0 }}" data-decimales="{{ decimales }}">
+    {{ (valeur or 0)|decimales(decimales) }}{% if unite %}<span class="unite">{{ unite }}</span>{% endif %}
+  </p>
+  <div class="kpi-bas">
+    <p class="kpi-note">{{ note|safe }}</p>
+    {{ etincelle|safe }}
+  </div>
+</article>
+{% endmacro %}
+
+{% macro kpi_texte(libelle, valeur, note='') %}
+<article class="panneau kpi">
+  <p class="kpi-libelle">{{ libelle }}</p>
+  <p class="kpi-valeur">{{ valeur }}</p>
+  <div class="kpi-bas"><p class="kpi-note">{{ note|safe }}</p></div>
+</article>
+{% endmacro %}
+
+{% macro badge(statut) %}
+  {% if statut == 'CHARGE' %}<span class="badge ok">Chargé</span>
+  {% elif statut == 'DEJA_CHARGE' %}<span class="badge info">Rejeu reconnu</span>
+  {% else %}<span class="badge danger">Structure refusée</span>{% endif %}
+{% endmacro %}
+
+{% macro badge_statut(statut) %}
+  {% if statut == 'paid' %}<span class="badge ok">Payé</span>
+  {% elif statut == 'closed' %}<span class="badge info">Clôturé</span>
+  {% elif statut == 'draft' %}<span class="badge neutre">Brouillon</span>
+  {% else %}<span class="badge danger">Annulé</span>{% endif %}
+{% endmacro %}
+
+{% macro vide(texte, aide='') %}
+<div class="vide-mini">
+  <div>{{ texte }}{% if aide %}<div class="aide">{{ aide }}</div>{% endif %}</div>
+</div>
+{% endmacro %}
