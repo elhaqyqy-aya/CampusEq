@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block contenu %}
+<article class="panneau stress-intro">
+  <div class="panneau-entete">
+    <h2>Un banc de charge qui passe par le vrai pipeline</h2>
+    <span id="stress-etat" class="badge neutre">prêt</span>
+  </div>
+  <p class="aide" style="margin-top:0">
+    Choisissez un ou plusieurs paliers et observez la génération, le chargement,
+    les rejets et la file d’attente. Chaque essai utilise un schéma PostgreSQL
+    temporaire isolé des données du projet, supprimé à la fin.
+  </p>
+  <form id="stress-form" class="stress-commandes">
+    <fieldset class="stress-debits">
+      <legend>Débit cible par palier · événements/s</legend>
+      {% for debit in (10, 100, 1000, 10000) %}
+      <label class="stress-debit">
+        <input type="checkbox" name="debit" value="{{ debit }}" checked>
+        <span>{{ '{:,}'.format(debit).replace(',', ' ') }}</span>
+      </label>
+      {% endfor %}
+    </fieldset>
+    <div class="champ">
+      <label for="stress-duree">Durée de chaque palier</label>
+      <select id="stress-duree" name="duree">
+        <option value="1">1 seconde</option>
+        <option value="3" selected>3 secondes</option>
+        <option value="10">10 secondes</option>
+        <option value="30">30 secondes</option>
+        <option value="60">60 secondes</option>
+      </select>
+    </div>
+    <button class="bouton" id="stress-demarrer" type="submit">Démarrer les paliers</button>
+    <button class="bouton discret" id="stress-arreter" type="button" disabled>Arrêter après le lot en cours</button>
+  </form>
+  <p id="stress-message" class="aide stress-message" role="status" aria-live="polite">
+    Le test ne modifie pas les contrats existants. Un seul test peut tourner à la fois.
+  </p>
+</article>
+
+<section class="grille kpi stress-kpis" aria-label="Mesures du stress test">
+  <article class="panneau kpi"><p class="kpi-libelle">Générés</p><p class="kpi-valeur" id="stress-generes">0</p></article>
+  <article class="panneau kpi"><p class="kpi-libelle">Reçus</p><p class="kpi-valeur" id="stress-recus">0</p></article>
+  <article class="panneau kpi"><p class="kpi-libelle">Traités</p><p class="kpi-valeur" id="stress-traites">0</p></article>
+  <article class="panneau kpi"><p class="kpi-libelle">Backlog maximum</p><p class="kpi-valeur" id="stress-backlog">0</p></article>
+</section>
+
+<section class="grille duo-inverse">
+  <article class="panneau">
+    <div class="panneau-entete">
+      <h2>Flux et débit par palier</h2>
+      <span class="note">événements réellement mesurés</span>
+    </div>
+    <div id="stress-paliers" class="stress-paliers">
+      <p class="aide">Lancez un test pour suivre les lots et les indicateurs en direct.</p>
+    </div>
+  </article>
+  <article class="panneau">
+    <div class="panneau-entete">
+      <h2>Qualité et ressources</h2>
+      <span class="note">valeurs cumulées de l’essai</span>
+    </div>
+    <dl class="stress-mesures">
+      <div><dt>Doublons retirés</dt><dd id="stress-doublons">0</dd></div>
+      <div><dt>Rejets de lignes</dt><dd id="stress-rejets">0</dd></div>
+      <div><dt>Erreurs pipeline</dt><dd id="stress-erreurs">0</dd></div>
+      <div><dt>Champs manquants</dt><dd id="stress-manquants">0</dd></div>
+      <div><dt>Anomalies</dt><dd id="stress-anomalies">0</dd></div>
+      <div><dt>Non reçus</dt><dd id="stress-perdus">0</dd></div>
+      <div><dt>En attente</dt><dd id="stress-attente">0</dd></div>
+      <div><dt>Volume CSV</dt><dd id="stress-octets">0 octet</dd></div>
+      <div><dt>CPU Python</dt><dd id="stress-cpu">—</dd></div>
+      <div><dt>Pic RAM Python</dt><dd id="stress-ram">—</dd></div>
+      <div><dt>Latence p95 lots</dt><dd id="stress-latence">—</dd></div>
+    </dl>
+    <p id="stress-rapport" class="aide stress-message"></p>
+  </article>
+</section>
+{% endblock %}

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="CampusEquip">
+  <defs>
+    <linearGradient id="fond" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#263449"/>
+      <stop offset="100%" stop-color="#17243a"/>
+    </linearGradient>
+    <linearGradient id="dessus" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8ec7b3"/>
+      <stop offset="100%" stop-color="#238f89"/>
+    </linearGradient>
+    <linearGradient id="gauche" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4ba89b"/>
+      <stop offset="100%" stop-color="#1b6f69"/>
+    </linearGradient>
+    <linearGradient id="droite" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#b39dbd"/>
+      <stop offset="100%" stop-color="#8977a8"/>
+    </linearGradient>
+    <linearGradient id="pouls" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#e5b84c"/>
+      <stop offset="60%" stop-color="#fff5d5"/>
+      <stop offset="100%" stop-color="#f07845"/>
+    </linearGradient>
+    <filter id="lueur" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="1.4" result="flou"/>
+      <feMerge><feMergeNode in="flou"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect x="0.5" y="0.5" width="63" height="63" rx="15" fill="url(#fond)"/>
+  <rect x="0.5" y="0.5" width="63" height="63" rx="15" fill="none"
+        stroke="#238f89" stroke-opacity="0.55"/>
+
+  <path d="M32 12.5 L48 21.5 L32 30.5 L16 21.5 Z" fill="url(#dessus)"/>
+  <path d="M16 21.5 L32 30.5 L32 50 L16 41 Z" fill="url(#gauche)"/>
+  <path d="M48 21.5 L32 30.5 L32 50 L48 41 Z" fill="url(#droite)"/>
+  <path d="M16 21.5 L32 30.5 L48 21.5" fill="none" stroke="#17243a"
+        stroke-opacity="0.28" stroke-width="0.8"/>
+
+  <path d="M12.5 34 H20.5 L24.5 24.5 L30 41.5 L34.5 30.5 L38.5 34 H51.5"
+        fill="none" stroke="#17243a" stroke-width="3.4" stroke-linecap="round"
+        stroke-linejoin="round" opacity="0.9"/>
+  <path d="M12.5 34 H20.5 L24.5 24.5 L30 41.5 L34.5 30.5 L38.5 34 H51.5"
+        fill="none" stroke="url(#pouls)" stroke-width="2.6" stroke-linecap="round"
+        stroke-linejoin="round" filter="url(#lueur)"/>
+
+  <circle cx="51.5" cy="34" r="2.4" fill="#fff5d5"/>
+  <circle cx="51.5" cy="34" r="5" fill="none" stroke="#e5b84c" stroke-opacity="0.55"/>
+</svg>

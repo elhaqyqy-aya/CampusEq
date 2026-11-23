@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f3efe6">
+    <meta name="description" content="An interactive presentation of the CampusEquip event pipeline.">
+    <title>Pipeline architecture — CampusEquip</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./pipeline.css">
+  </head>
+  <body>
+    <main class="presentation">
+      <header class="masthead">
+        <a class="wordmark" href="./index.html" aria-label="CampusEquip Field Office">
+          <span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span>campus<span class="wordmark-accent">equip</span></span>
+        </a>
+        <div class="masthead-meta"><span>ENGINEERING / AXES 03—04</span><span class="meta-divider"></span><span>PIPELINE ARCHITECTURE</span></div>
+        <div class="header-actions">
+          <a class="back-link" href="./index.html">Field office <span aria-hidden="true">↗</span></a>
+        </div>
+      </header>
+
+      <section class="experience" id="experience" aria-labelledby="flow-heading">
+        <div class="section-topline">
+          <div><span class="section-kicker" id="presentation-mode">STEP-BY-STEP PRESENTATION</span><h1 id="flow-heading">A route for every <em>field event.</em></h1></div>
+          <div class="flow-controls">
+            <span class="flow-state" id="flow-state"><i></i><span>STAGE 01 / 13</span></span>
+            <button class="text-control quiet-control" id="previous-button" type="button" aria-label="Previous step">← Previous</button>
+            <button class="text-control" id="next-button" type="button">Next step <span aria-hidden="true">→</span></button>
+            <button class="text-control quiet-control" id="restart-button" type="button">Restart</button>
+            <button class="text-control" id="overview-button" type="button">Show complete architecture</button>
+            <button class="text-control" id="step-mode-button" type="button" hidden>Return to step-by-step</button>
+            <button class="icon-action" id="fullscreen-button" type="button" aria-label="Enter full screen" title="Enter full screen">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 3H3v4M13 3h4v4M17 13v4h-4M7 17H3v-4"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="diagram-shell" id="diagram-shell">
+          <div class="diagram-scroll" id="diagram-viewport" tabindex="0" aria-label="Interactive pipeline architecture">
+            <div class="diagram" id="pipeline-diagram">
+              <svg class="connections" viewBox="0 0 1236 590" role="img" aria-label="Arrows show the event path and its database and monitoring branches">
+                <defs>
+                  <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                    <path d="M0 0 8 4 0 8z" fill="#9a684f"></path>
+                  </marker>
+                  <marker id="arrow-secondary" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+                    <path d="M0 0 7 3.5 0 7z" fill="#9b9c8d"></path>
+                  </marker>
+                </defs>
+              </svg>
+
+              <div class="lane-label lane-intake">CONTRACTS &amp; PUBLICATION</div>
+              <div class="lane-label lane-process">ORCHESTRATION &amp; INGESTION</div>
+              <div class="lane-label lane-output">PROJECTIONS &amp; PROOF</div>
+
+              <button class="node node-source" type="button" data-node="postgres">
+                <span class="node-top"><span class="node-kind">SOURCE OF TRUTH</span><span class="node-number">01</span></span>
+                <span class="node-icon icon-database" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="node-title">PostgreSQL</span>
+                <span class="node-caption">Accepted contracts</span>
+                <span class="node-footer">TRANSACTIONAL DATA</span>
+              </button>
+              <button class="node node-export" type="button" data-node="export">
+                <span class="node-top"><span class="node-kind">CLI / EXPORT</span><span class="node-number">02</span></span>
+                <span class="node-icon icon-export" aria-hidden="true"><i></i><i></i></span>
+                <span class="node-title">Export contracts</span>
+                <span class="node-caption">Only accepted records</span>
+                <span class="node-footer">exporter-contrats</span>
+              </button>
+              <button class="node node-csv" type="button" data-node="csv">
+                <span class="node-top"><span class="node-kind">CONTRACT SNAPSHOT</span><span class="node-number">03</span></span>
+                <span class="node-icon icon-file" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="node-title">contracts_acceptes.csv</span>
+                <span class="node-caption">Hashed input for a campaign</span>
+                <span class="node-footer">SHA-256 REFERENCE</span>
+              </button>
+              <button class="node node-producer" type="button" data-node="producer">
+                <span class="node-top"><span class="node-kind">EVENT PRODUCER</span><span class="node-number">04</span></span>
+                <span class="node-icon icon-producer" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="node-title">Generate event lots</span>
+                <span class="node-caption">Valid and teaching records</span>
+                <span class="node-footer">JSONL + MANIFEST</span>
+              </button>
+              <button class="node node-ready" type="button" data-node="ready">
+                <span class="node-top"><span class="node-kind">PUBLISHED INPUT</span><span class="node-number">05</span></span>
+                <span class="node-icon icon-ready" aria-hidden="true"><i></i><i></i></span>
+                <span class="node-title">Lot + READY</span>
+                <span class="node-caption">Complete, hash-checked files</span>
+                <span class="node-footer">SAFE TO CONSUME</span>
+              </button>
+
+              <button class="node node-sensor" type="button" data-node="sensor">
+                <span class="node-top"><span class="node-kind">AIRFLOW SENSOR</span><span class="node-number">06</span></span>
+                <span class="node-icon icon-sensor" aria-hidden="true"><i></i><i></i></span>
+                <span class="node-title">Wait for a lot</span>
+                <span class="node-caption">Finds the next published batch</span>
+                <span class="node-footer">attendre_lot_ready</span>
+              </button>
+              <button class="node node-integrity" type="button" data-node="integrity">
+                <span class="node-top"><span class="node-kind">INTEGRITY CHECK</span><span class="node-number">07</span></span>
+                <span class="node-icon icon-check" aria-hidden="true"><i></i></span>
+                <span class="node-title">Verify manifest</span>
+                <span class="node-caption">Schema, row count and SHA-256</span>
+                <span class="node-footer">controler_integrite</span>
+              </button>
+              <button class="node node-locations" type="button" data-node="locations">
+                <span class="node-top"><span class="node-kind">OPTIONAL LOAD</span><span class="node-number">08</span></span>
+                <span class="node-icon icon-location" aria-hidden="true"><i></i></span>
+                <span class="node-title">Load locations</span>
+                <span class="node-caption">Configured batch, or no-op</span>
+                <span class="node-footer">traiter_locations</span>
+              </button>
+              <button class="node node-mongo" type="button" data-node="mongo">
+                <span class="node-top"><span class="node-kind">DURABLE EVENT LOG</span><span class="node-number">09</span></span>
+                <span class="node-icon icon-mongo" aria-hidden="true"><i></i><i></i></span>
+                <span class="node-title">Validate &amp; ingest</span>
+                <span class="node-caption">Events, journal and rejections</span>
+                <span class="node-footer">MongoDB</span>
+              </button>
+
+              <button class="node node-cache" type="button" data-node="cache">
+                <span class="node-top"><span class="node-kind">FINANCIAL CACHE</span><span class="node-number">10</span></span>
+                <span class="node-icon icon-cache" aria-hidden="true"><i></i><i></i></span>
+                <span class="node-title">Refresh daily totals</span>
+                <span class="node-caption">SQL values, short-lived cache</span>
+                <span class="node-footer">PostgreSQL → Redis</span>
+              </button>
+              <button class="node node-incidents" type="button" data-node="incidents">
+                <span class="node-top"><span class="node-kind">REBUILDABLE VIEW</span><span class="node-number">11</span></span>
+                <span class="node-icon icon-incidents" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="node-title">Project incidents</span>
+                <span class="node-caption">Rebuilt from MongoDB history</span>
+                <span class="node-footer">MongoDB → Redis</span>
+              </button>
+              <button class="node node-verify" type="button" data-node="verify">
+                <span class="node-top"><span class="node-kind">COMPLETION GATE</span><span class="node-number">12</span></span>
+                <span class="node-icon icon-verify" aria-hidden="true"><i></i></span>
+                <span class="node-title">Verify outputs</span>
+                <span class="node-caption">Reconcile counts and projections</span>
+                <span class="node-footer">verifier_resultats</span>
+              </button>
+              <button class="node node-timescale" type="button" data-node="timescale">
+                <span class="node-top"><span class="node-kind">OBSERVABILITY</span><span class="node-number">↗</span></span>
+                <span class="node-icon icon-time" aria-hidden="true"><i></i><i></i></span>
+                <span class="node-title">TimescaleDB</span>
+                <span class="node-caption">Positions &amp; measured task attempts</span>
+                <span class="node-footer">METRICS, NOT EVENT HISTORY</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="diagram-legend">
+          <span><i class="legend-line"></i> EVENT PROCESSING PATH</span>
+          <span><i class="legend-line legend-secondary"></i> DATA / METRICS BRANCH</span>
+          <span><i class="legend-dot"></i> CLICK THE ACTIVE STAGE TO ADVANCE · REVISIT REVEALED STAGES FOR DETAILS</span>
+        </div>
+      <section class="detail-section" aria-live="polite" aria-labelledby="detail-title">
+        <div class="detail-aside">
+          <span class="section-kicker">COMPONENT NOTES</span>
+          <p id="detail-guidance">Start with the source of truth. Select the active component or use Next to continue the story.</p>
+          <div class="step-counter"><span id="selected-number">01</span><i></i><span id="selected-position">OF 13 COMPONENTS</span></div>
+        </div>
+        <div class="detail-card" id="detail-card">
+          <div class="detail-heading">
+            <div><span class="detail-type" id="detail-type">SOURCE OF TRUTH</span><h2 id="detail-title">PostgreSQL</h2></div>
+            <span class="detail-index" id="detail-index">01</span>
+          </div>
+          <div class="detail-grid">
+            <div class="detail-field"><span class="detail-label">COMPONENT</span><p id="detail-component"></p></div>
+            <div class="detail-field"><span class="detail-label">PURPOSE</span><p id="detail-purpose"></p></div>
+            <div class="detail-field"><span class="detail-label">ROLE IN FLOW</span><p id="detail-role"></p></div>
+            <div class="detail-field"><span class="detail-label">INPUT</span><p id="detail-input"></p></div>
+            <div class="detail-field"><span class="detail-label">PROCESSING</span><p id="detail-processing"></p></div>
+            <div class="detail-field"><span class="detail-label">OUTPUT</span><p id="detail-output"></p></div>
+            <div class="detail-field"><span class="detail-label">TECHNOLOGY</span><p id="detail-technology"></p></div>
+            <div class="detail-command" id="detail-command-wrap">
+              <span class="detail-label">PROJECT REFERENCE</span>
+              <code id="detail-command"></code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="footnote">
+        <span class="footnote-mark">NOTE</span>
+        <p>Airflow orchestrates the automated DAG. The CLI commands can also export, generate and process lots manually. TimescaleDB stores time-series positions and recorded Airflow attempts; it is not the event-history store.</p>
+      </section>
+      </section>
+
+      <footer class="page-footer"><span>CAMPUS EQUIP <b>·</b> FIELD OPERATIONS</span><span>AXES 03—04 <b>·</b> SYSTEM MAP</span></footer>
+    </main>
+    <script type="module" src="./pipeline.js"></script>
+  </body>
+</html>

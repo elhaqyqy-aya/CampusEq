@@ -1,0 +1,10 @@
+{% for evenement in flux %}
+<div class="evenement"
+     style="--ton: {{ 'var(--rose)' if evenement.ton == 'danger' else ('var(--ambre)' if evenement.ton == 'alerte' else 'var(--cyan)') }}; --d: {{ loop.index0 * 0.06 }}s">
+  <span class="titre">{{ evenement.titre }}</span>
+  <span class="detail">{{ evenement.detail }}</span>
+  <span class="quand">{{ evenement.quand|heurefr }}</span>
+</div>
+{% else %}
+<div class="aide">Aucune activité enregistrée pour le moment.</div>
+{% endfor %}

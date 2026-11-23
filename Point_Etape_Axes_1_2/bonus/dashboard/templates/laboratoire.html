@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import kpi, vide %}
+
+{% block contenu %}
+
+<section class="grille duo-inverse">
+  <article class="panneau">
+    <div class="panneau-entete">
+      <h2>Lecture par morceaux</h2>
+      <span class="note">bonus 3</span>
+    </div>
+    <p class="aide" style="margin-top:0">
+      Le lot est relu par tranches, puis comparé à la lecture complète : mêmes
+      décisions, mêmes positions, contrat jamais coupé.
+    </p>
+    <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:flex-end; margin:14px 0">
+      <div class="champ">
+        <label for="lot-morceau">Lot</label>
+        <select id="lot-morceau">
+          {% for lot in lots %}
+          <option value="{{ lot.batch_number }}">{{ '%06d'|format(lot.batch_number) }}</option>
+          {% else %}
+          <option value="1">000001</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="champ">
+        <label for="taille-morceau">Taille</label>
+        <select id="taille-morceau">
+          <option value="50">50 lignes</option>
+          <option value="200" selected>200 lignes</option>
+          <option value="1000">1 000 lignes</option>
+          <option value="10000">10 000 lignes</option>
+        </select>
+      </div>
+      <button class="bouton" data-action="morceaux">Lancer la lecture</button>
+    </div>
+    <div id="resultat-morceaux">
+      <div class="aide">Aucune mesure lancée pour l’instant.</div>
+    </div>
+  </article>
+
+  <article class="panneau">
+    <div class="panneau-entete">
+      <h2>Précalcul contre demande</h2>
+      <span class="note">bonus 2</span>
+    </div>
+    <p class="aide" style="margin-top:0">
+      La vue matérialisée <code>mv_montant_jour_campus</code> et le calcul direct
+      sur <code>v_lignes_retenues</code> doivent donner le même total.
+    </p>
+    <button class="bouton discret" data-action="precalcul" style="margin:14px 0">
+      Comparer les deux chemins
+    </button>
+    <div id="resultat-precalcul">
+      <div class="aide">Aucune comparaison lancée pour l’instant.</div>
+    </div>
+  </article>
+</section>
+
+<section class="grille duo-inverse">
+  <article class="panneau">
+    <div class="panneau-entete">
+      <h2>Index et plans</h2>
+      <span class="note">bonus 1</span>
+    </div>
+    {% if mesures %}
+    <p class="aide" style="margin-top:0">
+      Volume de mesure : {{ mesures.contrats }} contrats, {{ mesures.lignes }} lignes.
+      Index partiel <code>contracts (start_date) WHERE status IN ('paid','closed')</code>.
+    </p>
+    {% for requete in mesures.requetes %}
+    <div style="margin-top:14px">
+      <div class="panneau-entete" style="margin-bottom:6px">
+        <h2 style="font-size:11px; color:var(--texte-2)">{{ requete.nom }}</h2>
+        <span class="note">×{{ requete.gain }} sur {{ requete.gain_sur }}</span>
+      </div>
+      <div class="ligne-unite">
+        <div class="entete"><span>Sans index</span><b>{{ requete.avant }} ms</b></div>
+        <div class="piste-haute"><span style="width:{{ requete.largeur_avant }}%; background:var(--rose)"></span></div>
+      </div>
+      <div class="ligne-unite" style="margin-top:8px">
+        <div class="entete"><span>Avec index</span><b>{{ requete.apres }} ms</b></div>
+        <div class="piste-haute"><span style="width:{{ requete.largeur_apres }}%; background:var(--vert)"></span></div>
+      </div>
+    </div>
+    {% endfor %}
+    <p class="aide">
+      Sur le comptage, l’index évite de lire les 250 000 contrats. Sur l’agrégation,
+      le plan doit quand même parcourir toutes les lignes : l’index n’accélère que
+      le filtre, pas la jointure. C’est la limite d’un index, et c’est mesuré.
+    </p>
+    {% else %}
+    <p class="aide">
+      Mesures absentes. Lancez <code>python -m outils.preuve_index</code> :
+      le script écrit <code>preuves/index_mesures.json</code>, lu par cette page.
+    </p>
+    {% endif %}
+  </article>
+
+  <article class="panneau">
+    <div class="panneau-entete">
+      <h2>Boîtiers GPS simulés</h2>
+      <span class="note">bonus 4 · {{ points|length }} points</span>
+    </div>
+    {{ nuage|safe }}
+    <p class="aide">
+      Chaque point est une observation contrôlée (équipement connu, instant UTC,
+      bornes géographiques) puis stockée dans <code>iot_observations</code>,
+      séparée des montants des contrats.
+    </p>
+  </article>
+</section>
+
+<article class="panneau">
+  <div class="panneau-entete">
+    <h2>Catégories récursives</h2>
+    <span class="note">bonus 2 · WITH RECURSIVE</span>
+  </div>
+  <table class="tableau">
+    <thead>
+      <tr><th>Catégorie racine</th><th>Sous-catégorie</th><th class="nombre">Montant</th><th class="nombre">Part</th></tr>
+    </thead>
+    <tbody>
+      {% for racine in categories %}
+      <tr>
+        <td class="fort">{{ racine.nom }}</td>
+        <td style="color:var(--muet)">— total de l’arbre —</td>
+        <td class="nombre">{{ racine.montant|montant }}</td>
+        <td class="nombre">{{ (racine.montant / total_categories * 100)|pourcent }}</td>
+      </tr>
+      {% for enfant in racine.enfants %}
+      <tr>
+        <td></td>
+        <td style="padding-left:26px; color:var(--texte-2)">{{ enfant.nom }}</td>
+        <td class="nombre">{{ enfant.montant|montant }}</td>
+        <td class="nombre">{{ (enfant.montant / total_categories * 100)|pourcent }}</td>
+      </tr>
+      {% endfor %}
+      {% else %}
+      <tr><td colspan="4">{{ vide('Aucune catégorie valorisée sur la période.') }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</article>
+
+{% endblock %}

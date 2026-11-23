@@ -1,0 +1,183 @@
+{% extends 'base.html' %}
+
+{% block contenu %}
+<section class="iot-lab" id="iot-lab" aria-labelledby="iot-title">
+  <header class="iot-hero">
+    <div>
+      <div class="iot-eyebrow"><span class="iot-live-dot"></span> ATELIER MATÉRIEL · SIMULATION LOGIQUE</div>
+      <h1 id="iot-title">IoT <em>Lab</em></h1>
+      <p>Assemblez un circuit, câblez ses broches et observez le programme prendre vie.</p>
+    </div>
+    <div class="iot-project-control">
+      <label for="iot-projects">PROJETS GUIDÉS</label>
+      <select id="iot-projects">
+        <option value="blink">01 · Clignotement LED</option>
+        <option value="traffic">02 · Feu tricolore</option>
+        <option value="nightlight">03 · Éclairage automatique</option>
+        <option value="temperature">04 · Monitoring température</option>
+        <option value="parking">05 · Parking intelligent</option>
+        <option value="motion">06 · Alarme de mouvement</option>
+        <option value="servo">07 · Commande servo</option>
+        <option value="home">08 · Prototype domotique</option>
+        <option value="lcd">09 · Afficheur température</option>
+        <option value="rgb">10 · Contrôle LED RGB</option>
+      </select>
+    </div>
+  </header>
+
+  <div class="iot-toolbar" role="toolbar" aria-label="Commandes de simulation">
+    <div class="iot-toolbar-group">
+      <button class="iot-action iot-action-primary" id="iot-run" type="button" title="Démarrer la simulation">
+        <span aria-hidden="true">▶</span> Démarrer
+      </button>
+      <button class="iot-action" id="iot-stop" type="button" disabled title="Arrêter la simulation">
+        <span aria-hidden="true">■</span> Arrêter
+      </button>
+      <button class="iot-action iot-action-quiet" id="iot-reset" type="button" title="Réinitialiser la simulation">
+        <span aria-hidden="true">↻</span>
+      </button>
+      <span class="iot-run-state" id="iot-run-state" role="status">Prêt à simuler</span>
+    </div>
+    <div class="iot-toolbar-group">
+      <button class="iot-action" id="iot-verify" type="button"><span aria-hidden="true">✓</span> Vérifier</button>
+      <span class="iot-divider"></span>
+      <button class="iot-action iot-action-quiet" id="iot-zoom-out" type="button" aria-label="Dézoomer">−</button>
+      <span class="iot-zoom-value" id="iot-zoom-value">100%</span>
+      <button class="iot-action iot-action-quiet" id="iot-zoom-in" type="button" aria-label="Zoomer">+</button>
+      <button class="iot-action iot-action-quiet" id="iot-zoom-fit" type="button">Ajuster</button>
+    </div>
+  </div>
+
+  <div class="iot-workbench">
+    <aside class="iot-library" aria-label="Bibliothèque de composants">
+      <div class="iot-panel-heading">
+        <div><span class="iot-kicker">ATELIER</span><h2>Composants</h2></div>
+        <span class="iot-count" id="iot-component-count">0</span>
+      </div>
+      <p class="iot-panel-hint">Sélectionnez un composant pour l'ajouter au plateau.</p>
+      <div class="iot-library-list">
+        <div class="iot-library-group">
+          <h3>Passifs &amp; commandes</h3>
+          <button type="button" data-add-component="led-red"><i class="iot-part-icon led-red"></i> LED rouge</button>
+          <button type="button" data-add-component="led-green"><i class="iot-part-icon led-green"></i> LED verte</button>
+          <button type="button" data-add-component="led-blue"><i class="iot-part-icon led-blue"></i> LED bleue</button>
+          <button type="button" data-add-component="led-yellow"><i class="iot-part-icon led-yellow"></i> LED jaune</button>
+          <button type="button" data-add-component="resistor"><i class="iot-part-icon resistor"></i> Résistance</button>
+          <button type="button" data-add-component="button"><i class="iot-part-icon button"></i> Bouton poussoir</button>
+          <button type="button" data-add-component="potentiometer"><i class="iot-part-icon potentiometer"></i> Potentiomètre</button>
+          <button type="button" data-add-component="rgb-led"><i class="iot-part-icon rgb"></i> LED RGB</button>
+        </div>
+        <div class="iot-library-group">
+          <h3>Sorties</h3>
+          <button type="button" data-add-component="buzzer"><i class="iot-part-icon buzzer"></i> Buzzer</button>
+          <button type="button" data-add-component="servo"><i class="iot-part-icon servo"></i> Servomoteur</button>
+          <button type="button" data-add-component="lcd"><i class="iot-part-icon lcd"></i> LCD 16×2</button>
+          <button type="button" data-add-component="relay"><i class="iot-part-icon relay"></i> Relais</button>
+          <button type="button" data-add-component="motor"><i class="iot-part-icon motor"></i> Moteur CC</button>
+        </div>
+        <div class="iot-library-group">
+          <h3>Capteurs</h3>
+          <button type="button" data-add-component="ultrasonic"><i class="iot-part-icon ultrasonic"></i> Ultrason HC-SR04</button>
+          <button type="button" data-add-component="temperature"><i class="iot-part-icon temperature"></i> Température</button>
+          <button type="button" data-add-component="dht"><i class="iot-part-icon dht"></i> Humidité DHT</button>
+          <button type="button" data-add-component="ldr"><i class="iot-part-icon ldr"></i> Lumière LDR</button>
+          <button type="button" data-add-component="pir"><i class="iot-part-icon pir"></i> Mouvement PIR</button>
+        </div>
+      </div>
+      <div class="iot-shortcuts"><kbd>⌘</kbd>/<kbd>Ctrl</kbd> + clic sur deux broches · <kbd>Suppr</kbd> pour retirer</div>
+    </aside>
+
+    <section class="iot-circuit-panel" aria-label="Zone de construction du circuit">
+      <div class="iot-circuit-heading">
+        <div><span class="iot-kicker">CIRCUIT EN COURS</span><h2 id="iot-circuit-name">Clignotement LED</h2><p id="iot-lesson"></p></div>
+        <div class="iot-circuit-tools">
+          <button type="button" class="iot-small-button" id="iot-wire-mode" aria-pressed="true" title="Cliquer sur deux broches pour les relier">
+            <span class="iot-wire-swatch"></span> Câbler
+          </button>
+          <button type="button" class="iot-small-button" id="iot-pan-mode" aria-pressed="false" title="Glisser le plateau pour le déplacer">Panoramique</button>
+          <button type="button" class="iot-small-button" id="iot-wire-color" title="Changer la couleur du prochain fil">
+            <span aria-hidden="true">●</span> <span id="iot-wire-color-label">Signal</span>
+          </button>
+          <button type="button" class="iot-small-button" id="iot-rotate" title="Tourner le composant sélectionné">↻ Tourner</button>
+          <button type="button" class="iot-small-button iot-delete-button" id="iot-delete" title="Supprimer l'élément sélectionné">Supprimer</button>
+        </div>
+      </div>
+      <div class="iot-stage-scroll" id="iot-stage-scroll">
+        <svg id="iot-board" class="iot-board" viewBox="0 0 1480 680" role="img"
+             aria-label="Arduino Uno, breadboard, composants et connexions du circuit">
+          <defs>
+            <pattern id="iot-board-grain" width="7" height="7" patternUnits="userSpaceOnUse">
+              <circle cx="1" cy="1" r=".65" fill="#ffffff" opacity=".055"/>
+            </pattern>
+            <filter id="iot-shadow" x="-30%" y="-30%" width="160%" height="170%">
+              <feDropShadow dx="0" dy="13" stdDeviation="13" flood-color="#080f1c" flood-opacity=".38"/>
+            </filter>
+            <filter id="iot-led-glow" x="-150%" y="-150%" width="400%" height="400%">
+              <feGaussianBlur stdDeviation="7" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <g id="iot-board-scene"></g>
+        </svg>
+      </div>
+      <div class="iot-circuit-footer">
+        <span id="iot-circuit-message" role="status">Cliquez une broche, puis une seconde pour tracer un fil.</span>
+        <span class="iot-circuit-legend"><i class="legend-positive"></i> +5 V <i class="legend-ground"></i> GND <i class="legend-signal"></i> Signal</span>
+      </div>
+    </section>
+
+    <aside class="iot-inspector" aria-label="Inspecteur de composant">
+      <div class="iot-panel-heading">
+        <div><span class="iot-kicker">INSPECTEUR</span><h2 id="iot-inspector-title">Circuit</h2></div>
+      </div>
+      <div id="iot-inspector-content" class="iot-inspector-content">
+        <div class="iot-empty-selection">
+          <span class="iot-inspector-mark">⌁</span>
+          <strong>Tout commence par une connexion.</strong>
+          <p>Sélectionnez une broche ou un composant pour afficher ses propriétés.</p>
+        </div>
+      </div>
+      <div class="iot-validation" id="iot-validation" aria-live="polite">
+        <span class="iot-validation-mark">!</span>
+        <div><strong>Vérification du circuit</strong><p id="iot-validation-message">Prêt pour une première vérification.</p></div>
+      </div>
+    </aside>
+  </div>
+
+  <section class="iot-lower">
+    <div class="iot-code-panel">
+      <div class="iot-lower-heading">
+        <div><span class="iot-kicker">FIRMWARE PÉDAGOGIQUE</span><h2>Programme Arduino</h2></div>
+        <label class="iot-speed-control">TEMPO
+          <select id="iot-speed"><option value="1">1×</option><option value="2">2×</option><option value="4">4×</option></select>
+        </label>
+      </div>
+      <div class="iot-editor">
+        <div class="iot-line-numbers" id="iot-line-numbers" aria-hidden="true"></div>
+        <pre class="iot-highlight" id="iot-highlight" aria-hidden="true"></pre>
+        <textarea id="iot-code" aria-label="Code Arduino C++" spellcheck="false"
+                  autocapitalize="off" autocomplete="off" autocorrect="off"></textarea>
+      </div>
+      <div class="iot-code-note"><span aria-hidden="true">ⓘ</span> Interpréteur pédagogique Arduino C++ (sous-ensemble documenté) — pas d'émulation AVR.</div>
+    </div>
+    <div class="iot-serial-panel">
+      <div class="iot-lower-heading">
+        <div><span class="iot-kicker">SORTIE MATÉRIELLE</span><h2>Moniteur série</h2></div>
+        <label class="iot-baud-control"><span class="sr-only">Vitesse du moniteur série</span>
+          <select id="iot-baud"><option>9600</option><option>19200</option><option>38400</option><option>57600</option><option>115200</option></select>
+          <span>baud</span>
+        </label>
+      </div>
+      <div class="iot-serial-output" id="iot-serial-output" role="log" aria-live="polite">
+        <div class="iot-serial-placeholder">Les messages <code>Serial.print()</code> apparaîtront ici.</div>
+      </div>
+      <div class="iot-serial-footer">
+        <span id="iot-serial-status">Déconnecté</span>
+        <button type="button" id="iot-clear-serial">Effacer la console</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="iot-disclosure"><span>ⓘ</span> Ce laboratoire exécute un sous-ensemble Arduino C++ dans un interpréteur JavaScript local. Il n'émule pas le processeur AVR, ne compile pas le firmware et ne prétend pas flasher une carte réelle. Les broches, capteurs, fils et composants réagissent aux fonctions explicitement prises en charge.</div>
+</section>
+{% endblock %}

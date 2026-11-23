@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ titre }} · CampusEquip</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="panneau-erreur">
+    <p class="kpi-libelle">CampusEquip · console</p>
+    <h1>{{ titre }}</h1>
+    <p>{{ message }}</p>
+    {% if detail %}<pre>{{ detail }}</pre>{% endif %}
+    <p class="aide" style="margin-top:18px">
+      Vérifiez que PostgreSQL est démarré et que <code>DATABASE_URL</code> pointe
+      vers la bonne base, puis rechargez cette page.
+    </p>
+    <p style="margin-top:16px"><a class="lien" href="/">Revenir à la console</a></p>
+  </div>
+</body>
+</html>
